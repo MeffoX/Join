@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join - Summary</title>
+    <link rel="icon" href="assets/img/logo-blue.png">
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="css/summary.css">
+    <link rel="stylesheet" href="css/summary-responsive.css">
+    <script src="script.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/mini_backend.js"></script>
+    <link rel="stylesheet" href="assets/templates/style_templates.css">
+</head>
+
+<body onload="onLoad()">
+    <div w3-include-html="assets/templates/Sidebar.html"></div>
+    <div w3-include-html="assets/templates/header.html"></div>
+    <section>
+        <div class="summary-headline">
+            <h1>Summary</h1>
+            <hr>
+            <p>Everything in a nutshell!</p>
+        </div>
+
+        <div class="summary-board" id="section">
+            
+            <div class="top-board">
+                <a href="board.html" class="task box-shadow">
+                    <h2 id="tasksInBoard">0</h2>
+                    <p>Tasks in <span>Board</span></p>
+                </a>
+                <a class="task box-shadow" href="board.html">
+                    <h2 id="tasksInProgress">0</h2>
+                    <p>Tasks in <span>Progress</span></p>
+                </a>
+                <a class="task box-shadow" href="board.html">
+                    <h2 id="awaiting-number">0</h2>
+                    <p>Awaiting <span>Feedback</span></p>
+                </a>
+            </div>
+
+            <div class="middle-board">
+                <a class="middle-board-inner box-shadow" href="board.html">
+                    <div class="urgent-container">
+                        <img src="assets/img/urgent-icon.png" id="urgent-icon">
+                        <div class="urgent-inner-container">
+                            <h2 id="urgent-number">0</h2>
+                            <p>Urgent</p>
+                        </div>
+                    </div>
+                    <hr class="vertical-line">
+                    <div class="upcoming-date">
+                        <h2>October 16, 2023</h2>
+                        <p>Upcoming Deadline</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="bottom-board">
+                <a id="to-do-container" class="to-do box-shadow" onmouseover="hoverTodoOn()" onmouseout="hoverOff()"
+                    href="board.html">
+                    <img src="assets/img/todo-icon.png" id="todo-icon">
+                    <div class="todo-inner-container">
+                        <h2 id="todo-number">0</h2>
+                        <p id="todo-p">To-do</p>
+                    </div>
+                </a>
+
+                <a id="done-container" class="done box-shadow" onmouseover="hoverDoneOn()" onmouseout="hoverOff()"
+                    href="board.html">
+                    <img src="assets/img/done-icon.png" id="done-icon">
+                    <div class="done-inner-container">
+                        <h2 id="done-number">0</h2>
+                        <p id="done-p">Done</p>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="welcomingSummary">
+        <div id="welcomeGreeting">
+                <h3 id="greeting"></h3>
+                <h4 id="greetUser"></h4>
+        </div>
+    </div>
+</body>
+
+</html>

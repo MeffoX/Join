@@ -1,0 +1,91 @@
+body {
+    margin: 100px 10% 100px 232px;
+    padding-left: 100px;
+}
+
+.legal-arrow {
+    position: absolute;
+    margin-top: 65px;
+    right: 10%;
+    cursor: pointer;
+}
+
+.legal-arrow:hover {
+    transform: scale(1.1);
+    filter: invert(70%) sepia(49%) saturate(3114%) hue-rotate(166deg) brightness(88%) contrast(102%);
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 59px;
+}
+
+/* help */
+
+.what-is-join {
+    margin-top: 40px;
+}
+
+.how-to-use {
+    margin: 40px 0;
+}
+
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ol {
+    display: flex;
+}
+
+li {
+    display: flex;
+    padding-bottom: 20px;
+}
+
+li span {
+    font-size: 36px;
+    padding-right: 30px;
+}
+
+li p {
+    margin: 0;
+}
+
+
+@media (max-width: 1000px) {
+
+    body {
+        margin: 100px 10% 150px 0;
+    }
+}
+
+@media (max-width: 640px) {
+
+    body {
+        margin: 100px 10% 150px 0;
+        padding-left: 10%;
+    }
+
+    h1 {
+        font-size: 43px !important;
+    }
+
+    .legal-arrow {
+        margin-top: 81px !important;
+    }
+
+}
+
+@media (max-width: 440px) {
+
+    .legal-arrow {
+        margin-top: 74px !important;
+    }
+
+    h1 {
+        font-size: 36px !important;
+    }
+}

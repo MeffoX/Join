@@ -1,0 +1,479 @@
+/* general */
+body {
+    background-color: #F5F5F5;
+    margin: 0;
+    font-family: 'Open-sans', sans-serif;
+    font-weight: 400;
+}
+
+.d-none {
+    display: none;
+}
+
+.login-container {
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container-style {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -10;
+}
+
+/* Logo */
+#logo-container,
+#logo-container-reset-password {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    animation: backgroundFadeOut 500ms ease-in-out 500ms;
+    animation-fill-mode: forwards;
+    background-color: #f5f5f5;
+}
+
+@keyframes backgroundFadeOut {
+    from {
+        position: absolute;
+    }
+
+    to {
+        position: unset;
+    }
+}
+
+#join-logo,
+#join-logo-reset-password {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 260px;
+    transform: translate(-50%, -50%);
+    animation: Logo-Animation 700ms ease-in-out 500ms;
+    animation-fill-mode: forwards;
+    z-index: 3;
+    transition: transform 100ms ease-in-out;
+}
+
+#join-logo-reset-password {
+    cursor: pointer;
+}
+
+@keyframes Logo-Animation {
+    from {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: transform 100ms ease-in-out 300ms;
+    }
+
+    to {
+        top: -71px;
+        left: -30px;
+        transform: translate(4%, 5%);
+        transform: scale(0.3);
+    }
+}
+
+/* Not a Join user? Sign up */
+#signup-container {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 45px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+#signup-container p {
+    font-size: 21px;
+}
+
+#signup-btn {
+    background-color: #2a3647;
+    border-radius: 8px;
+    height: 51px;
+    width: 91px;
+    border: unset;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 100ms ease-in-out,
+        box-shadow 100ms ease-in-out;
+}
+
+#signup-btn:hover,
+#loginBtn:hover,
+#registerBtn:hover,
+#forgotPasswordBtn:hover,
+#resetPasswordBtn:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 9px -1px rgba(0, 0, 0, 0.4);
+}
+
+/* Login Container  */
+#login-container,
+.wider-container-style {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+
+.login-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0 35px;
+    width: 550px;
+    background-color: #fff;
+    border-radius: 30px;
+    gap: 25px;
+    padding: 35px 0 35px 0;
+}
+
+.login-form h1 {
+    font-size: 49px;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    margin: 0 15px;
+}
+
+.login-form hr {
+    height: 3px;
+    width: 150px;
+    background-color: #29ABE2;
+    margin: 0;
+    border: unset;
+}
+
+.input-field {
+    width: 422px;
+    height: 46px;
+    font-size: 21px;
+    padding-left: 20px;
+    border: 1px solid #d1d1d1;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.input-field::placeholder {
+    color: #d1d1d1;
+}
+
+.login-settings {
+    width: 422px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* Customize the label (the container) -- Remember me */
+.remember-me {
+    position: relative;
+}
+
+/* Hide the browser's default checkbox */
+.remember-me input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+    background-image: linear-gradient(#F9F9F9, #F0F0F0);
+}
+
+/* On mouse-over, add a grey background color */
+.remember-me:hover input~.checkmark {
+    background-color: #d1d1d1;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.remember-me input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.remember-me .checkmark:after {
+    left: 4px;
+    top: -2px;
+    width: 6px;
+    height: 12px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.remember-me p {
+    margin-left: 35px;
+    cursor: pointer;
+}
+
+#forget-password {
+    color: #29ABE2;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.login-btns {
+    width: 422px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+#loginBtn,
+#forgotPasswordBtn,
+#resetPasswordBtn {
+    background-color: #2a3647;
+    border-radius: 8px;
+    height: 51px;
+    width: 165px;
+    border: unset;
+    color: #fff;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#loginBtn {
+    margin-left: 30px;
+}
+
+#loginGuest {
+    background-color: #fff;
+    border-radius: 8px;
+    height: 51px;
+    width: 165px;
+    border: unset;
+    font-size: 21px;
+    font-weight: 700;
+    border: 2px solid #2a3647;
+    color: #2a3647;
+    cursor: pointer;
+}
+
+#loginGuest:hover {
+    border: 2px solid #29ABE2;
+    color: #29ABE2;
+    box-shadow: 0px 4px 9px -1px rgba(0, 0, 0, 0.4);
+}
+
+/*Sign Up Form */
+#userName {
+    background: url(../assets/img/user-icon.png) no-repeat scroll 370px 15px;
+}
+
+#emailLogin,
+#emailSignUp {
+    background: url(../assets/img/email-icon.png) no-repeat scroll 370px 15px;
+}
+
+#passwordLogin:focus,
+#emailLogin:focus,
+#userName:focus,
+#emailSignUp:focus,
+#password:focus,
+#email:focus {
+    outline: 2px solid #29ABE2;
+}
+
+#password,
+#passwordLogin {
+    background: url(../assets/img/password-icon.png) no-repeat scroll 370px 15px;
+}
+
+#registerBtn {
+    border-radius: 8px;
+    border: unset;
+    width: 145px;
+    height: 51px;
+    background-color: #2a3647;
+    cursor: pointer;
+    font-size: 21px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.arrow-left {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    cursor: pointer;
+}
+
+.signup-feedback {
+    z-index: 60;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2a3647;
+    height: 50px;
+    width: 70%;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    padding-top: 25px;
+    font-size: 23px;
+    font-weight: 400;
+    animation: slideIn 225ms ease-in-out;
+}
+
+/* forgotten password form  */
+.forgotten-password-from,
+.reset-password-form {
+    padding: 30px 55px 30px 55px;
+}
+
+.forgotten-password-from p {
+    font-size: 21px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+}
+
+#forgotPasswordBtn {
+    width: 230px !important;
+}
+
+.sent-mail-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(160, 160, 160, 0);
+    animation: slideInBackground 225ms ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideInBackground {
+    from {
+        background-color: rgba(160, 160, 160, 0);
+    }
+
+    to {
+        background-color: rgba(160, 160, 160, 0.6);
+    }
+}
+
+.sent-mail-message {
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translate(-50%, 1000%);
+    animation: slideIn 225ms ease-in-out;
+    animation-fill-mode: forwards;
+
+    border: unset;
+    border-radius: 8px;
+    width: 485px;
+    height: 74px;
+    cursor: pointer;
+
+    font-size: 23px;
+    font-weight: 400;
+    gap: 20px;
+    color: #fff;
+    background-color: #2a3647;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translate(-50%, 1000%);
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
+.reset-password-form p {
+    font-size: 21px;
+    margin: 0;
+    text-align: center;
+}
+
+#feedbackContainer,
+#feedbackForgotPsw {
+    position: absolute;
+    bottom: 93px;
+    color: red;
+    font-size: 14px;
+}
+
+.shake-animation {
+    animation: shake 200ms 2;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        translate: 0;
+    }
+
+    25% {
+        translate: 0.125rem;
+        border-color: red;
+    }
+
+    75% {
+        translate: -0.125rem;
+        border-color: red;
+    }
+}

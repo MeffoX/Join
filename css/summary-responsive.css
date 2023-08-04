@@ -1,0 +1,242 @@
+@media (max-width: 1300px) {
+
+    #welcomingSummary {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(42, 54, 71);
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: backgroundFade 1200ms ease-in-out 500ms, removePosition 1300ms ease-in-out 500ms;
+        animation-fill-mode: forwards;
+    }
+    
+    
+    @keyframes backgroundFade {
+        0% {
+            background-color: rgba(42, 54, 71, 1);
+        }
+    
+        100% {
+            background-color: rgba(42, 54, 71, 0);
+            display: none;
+        }
+    }
+    
+    #welcomeGreeting {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: FadeAway 700ms ease-in-out 500ms, RemoveContainer 1ms 1000ms;
+        animation-fill-mode: forwards;
+        display: unset;
+        opacity: 1;
+    }
+
+    @keyframes RemoveContainer {
+        0% {
+            position: absolute;
+        }
+
+        100% {
+            position: unset;
+        }
+    }
+
+    @keyframes FadeAway {
+        0% {
+            opacity: 1;
+            display: unset;
+        }
+
+        100% {
+            opacity: 0;
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+
+    body {
+        margin-left: 0 !important;
+        padding-left: 0;
+    }
+
+    .checkbox-feedback {
+        top: 8%;
+        left: 50%;
+        font-size: 20px;
+    }
+
+    section {
+        margin: 0;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .checkbox-feedback {
+        font-size: 17px;
+    }
+
+    section {
+        margin-top: 0px;
+    }
+
+    .summary-headline {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: -180px !important;
+        margin-top: 20px;
+    }
+
+    .summary-headline h1 {
+        order: 1;
+        margin: 0;
+        font-size: 43px;
+    }
+
+    .summary-headline p {
+        order: 2;
+        font-size: 20px;
+    }
+
+    .summary-headline hr {
+        order: 3;
+        height: 3px;
+        width: 80px;
+        margin: 0;
+    }
+
+    .summary-board {
+        gap: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .top-board {
+        gap: 20px;
+        width: unset;
+    }
+
+    .task {
+        width: 80px;
+    }
+
+    .task h2,
+    #urgent-number,
+    #todo-number,
+    #done-number {
+        font-size: 40px;
+    }
+
+    .task p,
+    .urgent-inner-container p,
+    .todo-inner-container p,
+    .done-inner-container p {
+        font-size: 15px;
+    }
+
+    .middle-board-inner,
+    .bottom-board {
+        width: 400px;
+        height: 125px;
+    }
+
+    .bottom-board {
+        gap: 25px;
+    }
+
+    #todo-icon,
+    #done-icon,
+    #urgent-icon {
+        height: 55px;
+    }
+
+    .to-do,
+    .done {
+        height: 125px;
+    }
+}
+
+@media (max-width: 500px) {
+    
+    .checkbox-feedback {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 440px) {
+
+    .checkbox-feedback {
+        font-size: 17px;
+
+    }
+
+    .summary-headline {
+        margin-right: -50px;
+    }
+
+    .summary-headline h1 {
+        font-size: 36px !important;
+    }
+
+    .summary-headline p {
+        font-size: 16px !important;
+    }
+
+    .summary-headline hr {
+        height: 2px !important;
+    }
+
+    .task {
+        width: 55% !important;
+    }
+
+    .task h2,
+    #todo-number,
+    #done-number,
+    #urgent-number {
+        font-size: 30px !important;
+    }
+
+    .upcoming-date h2 {
+        font-size: 17px;
+    }
+
+    .task p,
+    #todo-p,
+    #done-p,
+    .urgent-inner-container p,
+    .upcoming-date p {
+        font-size: 12px !important;
+    }
+
+    .middle-board-inner, .bottom-board {
+        width: 305px !important;
+        height: 105px !important;
+    }
+
+    .to-do, .done {
+        height: 105px !important;
+    }
+
+    .vertical-line {
+        height: 70px;
+    }
+
+    #todo-icon, #done-icon, #urgent-icon {
+        height: 40px !important;
+    }
+}
+
+

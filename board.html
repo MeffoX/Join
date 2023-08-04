@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+    <link rel="stylesheet" href="./css/board.css">
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="icon" href="assets/img/logo-blue.png">
+    <link rel="stylesheet" href="./assets/templates/style_templates.css">
+    <link rel="stylesheet" href="./assets/templates/addTaskPopUp.css">
+
+    <script src="./script.js"></script>
+    <script src="./js/mini_backend.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/HTMLsBoard_AddTask.js"></script>
+    <script src="./js/contacts.js"></script>
+    <script src="./assets/templates/addTaskPopUp.js"></script>
+
+</head>
+
+<body onload="initBoard()">
+    <div w3-include-html="./assets/templates/Sidebar.html"></div>
+    <div w3-include-html="./assets/templates/header.html"></div>
+    <div onload="contactList()" id="includeContainer" w3-include-html="./assets/templates/addTaskPopUp.html"></div>
+    <div id="wrapper" class="wrapper">
+
+        <div class="boardHeader">
+            <h1>Board</h1>
+            <div class="inputContainer">
+                <img class="searchImgInput" src="./assets/img/search.png">
+                <input onkeyup="renderTaskCards()" id="findATask" required class="boardInput" type="search"
+                    placeholder="Find Task" maxlength="21">
+                <div onclick="openPopUpAddTask()" class="addTaskButton">
+                    <span>Add task</span> <span class="buttonPlus">+</span>
+                </div>
+            </div>
+        </div><!--board Header closes-->
+
+
+
+        <div class="boardContent">
+            <div class="headings">
+                <div class="boardSubsections">
+                    <div class="boardSubsectionHeader">
+                        <h2>To do</h2>
+                        <img class="plusButton" onclick="openPopUpAddTask()" src="./assets/img/plusButtonBoard.png">
+                    </div>
+                    <div ondrop="moveTo('toDo')" ondragover="allowDrop(event)" id="boardSubsectionToDo"
+                        class="boardSubsection">
+                    </div>
+                </div>
+
+                <div class="boardSubsections">
+                    <div class="boardSubsectionHeader">
+                        <h2>In progress</h2>
+                        <img class="plusButton" onclick="openPopUpAddTask()" src="./assets/img/plusButtonBoard.png">
+                    </div>
+                    <div ondrop="moveTo('inProgress')" ondragover="allowDrop(event)" id="boardSubsectionInProgress"
+                        class="boardSubsection">
+                    </div>
+                </div>
+
+                <div class="boardSubsections">
+                    <div class="boardSubsectionHeader">
+                        <h2>Awaiting Feedback</h2>
+                        <img class="plusButton" onclick="openPopUpAddTask()" src="./assets/img/plusButtonBoard.png">
+                    </div>
+                    <div ondrop="moveTo('awaitingFeedback')" ondragover="allowDrop(event)" id="boardSubsectionFeedback"
+                        class="boardSubsection">
+                    </div>
+                </div>
+
+                <div class="boardSubsections">
+                    <div class="boardSubsectionHeader">
+                        <h2>Done</h2>
+                        <img class="plusButton" onclick="openPopUpAddTask()" src="./assets/img/plusButtonBoard.png">
+                    </div>
+                    <div ondrop="moveTo('done')" ondragover="allowDrop(event)" id="boardSubsectionDone"
+                        class="boardSubsection">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div id="dialogFullCard" class="dialogFullCard displayNone">
+                <div class="dialogFullCardContent">
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="dialogEditCard" class="dialogFullCard displayNone">
+
+        </div><!--Edit card container closed-->
+
+
+    </div><!--wrapper closed-->
+    <div class="colorPickers">
+        <div id="colors0" style="background-color:#8AA4FF;"></div>
+        <div id="colors1" style="background-color:#FF0000;"></div>
+        <div id="colors2" style="background-color:#2AD300 ;"></div>
+        <div id="colors3" style="background-color:#FF8A00 ;"></div>
+        <div id="colors4" style="background-color:#E200BE ;"></div>
+        <div id="colors5" style="background-color:#0038FF ;"></div>
+    </div>
+
+    </div><!--content closed-->
+    </div><!--wrapper closed-->
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <link rel="stylesheet" href="assets/templates/style_templates.css">
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="icon" href="assets/img/logo-blue.png">
+    <script src="script.js"></script>
+    <script src="js/contacts.js"></script>
+    <script src="js/contact-templates.js"></script>
+    <script src="js/mini_backend.js"></script>
+    <link rel="stylesheet" href="css/contacts.css">
+    <link rel="stylesheet" href="css/contacts-responsive.css">
+
+
+</head>
+
+<body onload="initContacts()">
+    <div w3-include-html="../assets/templates/header.html"></div>
+    <div w3-include-html="../assets/templates/Sidebar.html"></div>
+    <div class="contacts">
+
+        <div class="overlay-container d-none" id="overlayContainer">
+            <div class="add-contact-overlay" id="addContactOverlay">
+                <div class="add-contact-left" id="addContactLeft">
+                </div>
+                <div class="add-contact-right" id="addContactRightContent">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="contact-list" id="contactContainer">
+            <div id="contactList"></div>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-header">
+                <div class="kanban-responsive d-none">Kanban Project Management Tool</div>
+                <h1>Contacts</h1>
+                <hr class="contacts-hr-line">
+                <h2 class="better">Better with a team</h2>
+                <hr class="hr-responsive d-none">
+            </div>
+            <img class="contact-info-close d-none" onclick="closeContactInfo()" src="../assets/img/black-back-arrow.png">
+            <div class="contact-info d-none" id="contactInfo">
+            </div>
+        </div>
+
+        <div id="contactCreated" class="d-none">
+            <span>contact created successfuly</span>
+            <img src="../assets/img/contacts-icon.svg">
+        </div>
+
+        <div class="add-new-contact">
+            <button class="add-contact-button" id="addContactButton" onclick="openAddContacts()">New Contact<img
+                    src="../assets/img/icons-add-contact.svg"></button>
+        </div>
+    </div>
+
+</body>
+
+</html>

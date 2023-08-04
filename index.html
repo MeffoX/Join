@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" href="assets/img/logo-blue.png">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="css/index-responsive.css">
+    <script src="js/index.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/forgot_password.js"></script>
+    <script src="js/mini_backend.js"></script>
+</head>
+
+<body onload="init()">
+    <div id="logo-container">
+        <img src="assets/img/logo-blue.png" id="join-logo">
+    </div>
+
+    <div id="login-main">
+        <div id="signup-container">
+            <p>Not a Join user?</p>
+            <button id="signup-btn" onclick="openSignUpContainer()">Sign up</button>
+        </div>
+
+        <div id="login-container">
+            <form onsubmit="checkUser(); return false;" class="login-form">
+                <h1>Log in</h1>
+                <hr>
+                <input class="input-field" placeholder="Email" type="email" id="emailLogin" required>
+                <input class="input-field" placeholder="Password" type="password" id="passwordLogin"
+                    onkeydown="enter(event)" required>
+                <div class="login-settings">
+                    <label class="remember-me">
+                        <input id="checkbox" type="checkbox">
+                        <p>Remember me</p>
+                        <span id="checkmark" class="checkmark"></span>
+                    </label>
+                    <a onclick="openForgotPassword(); return false" id="forget-password">Forgot my password</a>
+                </div>
+                <div class="login-btns">
+                    <button type="submit" id="loginBtn">Log in</button>
+                    <button onclick="openGuestLogin(); return false;" id="loginGuest">Guest Log in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="signup-forgotPsw-container"></div>
+</body>
+
+</html>

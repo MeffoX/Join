@@ -1,0 +1,124 @@
+@media (max-width: 570px) {
+
+    .login-form h1 {
+        font-size: 43px;
+        text-align: center;
+        font-size: 36px;
+    }
+
+    .login-form hr {
+        height: 2px;
+    }
+
+    .login-form {
+        max-width: 100%;
+    }
+
+    .input-field {
+        width: 300px;
+        height: 38px;
+    }
+
+    #userName {
+        background: url(../assets/img/user-icon.png) no-repeat scroll 256px 8px;
+    }
+
+    #emailLogin,
+    #emailSignUp {
+        background: url(../assets/img/email-icon.png) no-repeat scroll 256px 8px;
+    }
+
+    #password,
+    #passwordLogin {
+        background: url(../assets/img/password-icon.png) no-repeat scroll 256px 8px;
+    }
+
+    .login-form {
+        width: 350px;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .login-settings {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: flex-start;
+        margin-left: -150px;
+        width: unset;
+    }
+
+    .login-btns {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        width: 350px;
+    }
+
+    #loginBtn {
+        margin: 0;
+    }
+
+    #loginGuest {
+        position: unset;
+        margin: 25px 0 0 0;
+    }
+
+    #join-logo,
+    #join-logo-reset-password {
+        height: 165px;
+    }
+
+    @keyframes Logo-Animation {
+        from {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 100ms ease-in-out 300ms;
+        }
+
+        to {
+            top: -25px;
+            left: -20px;
+            transform: translate(4%, 5%);
+            transform: scale(0.3);
+        }
+    }
+
+    #signup-container {
+        bottom: 15px;
+        align-items: center;
+        top: unset;
+        left: 50%;
+        right: unset;
+        transform: translate(-50%);
+    }
+
+    #signup-container p {
+        white-space: nowrap;
+    }
+
+    #feedbackContainer,
+    #feedbackForgotPsw {
+        bottom: 105px;
+    }
+
+    .sent-mail-message {
+        width: 350px;
+        height: 60px;
+        font-size: 18px;
+    }
+
+    .forgotten-password-from,
+    .reset-password-form {
+        padding: 45px 0 45px 0;
+    }
+
+    .arrow-left {
+        top: 30px;
+        left: 25px;
+    }
+
+    .reset-password-form p {
+        font-size: 18px;
+    }
+}

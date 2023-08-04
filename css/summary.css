@@ -1,0 +1,355 @@
+body {
+    background-color: #F5F5F5;
+    margin: 0;
+    font-family: 'Open-sans', sans-serif;
+    font-weight: 400;
+    margin-left: 232px;
+    padding-left: 100px;
+    margin-top: 100px;
+}
+
+.d-none {
+    display: none !important;
+}
+
+#welcomingSummary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(42, 54, 71);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: backgroundFade 1200ms ease-in-out 500ms, removePosition 1300ms ease-in-out 500ms;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes backgroundFade {
+    0% {
+        background-color: rgba(42, 54, 71, 1);
+    }
+
+    100% {
+        background-color: rgba(42, 54, 71, 0);
+    }
+}
+
+@keyframes removePosition {
+    0% {
+        position: absolute;
+    }
+    100% {
+        position: unset;
+    }
+}
+
+#welcomeGreeting {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: greetingPostition 1000ms ease-in-out 1000ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes greetingPostition {
+    0% {
+        transform: translate(-50%, -50%);
+    }
+
+    100% {
+        color: #2A3647;
+        transform: translate(80%, -40%);
+    }
+}
+
+.checkbox-feedback {
+    z-index: 60;
+    position: absolute;
+    top: 50px;
+    left: 60%;
+    transform: translate(-50%, -200%);
+    background-color: #2a3647;
+    height: 50px;
+    width: 70%;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-size: 23px;
+    font-weight: 400;
+    animation: slideInFeedback 225ms ease-in-out 1000ms, slideOutFeedback 225ms ease-in-out 3000ms;
+    animation-fill-mode: forwards;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes slideInFeedback {
+    0% {
+        transform: translate(-50%, -200%);
+    }
+
+    100% {
+        transform: translate(-50%, 0%);
+    }
+}
+
+@keyframes slideOutFeedback {
+    0% {
+        transform: translate(-50%, 0%);
+    }
+
+    100% {
+        transform: translate(-50%, -200%);
+    }
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 100px;
+}
+
+.summary-board {
+    gap: 35px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.summary-headline {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.summary-headline h1 {
+    font-weight: 700;
+    font-size: 59px;
+    margin: 30px 0;
+}
+
+.summary-headline hr {
+    background-color: #29ABE2;
+    height: 50px;
+    border: none;
+    width: 2px;
+    margin: 0 30px 0 50px;
+}
+
+.summary-headline p {
+    font-size: 22px;
+    color: #2A3647;
+}
+
+.top-board {
+    display: flex;
+    gap: 35px;
+    width: 550px;
+}
+
+.task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    width: 170px;
+    cursor: pointer;
+    color: black;
+    transition: transform 100ms ease-in-out,
+        background-color 100ms ease-in-out;
+    transform: scale(1);
+}
+
+.task h2 {
+    font-size: 59px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.task p {
+    display: flex;
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 18px;
+    color: #2A3647;
+    margin: 0;
+    background-color: #fff;
+    transition: background-color 100ms ease-in-out;
+}
+
+.task:hover p,
+.task:hover {
+    background-color: #2A3647;
+    color: white;
+    transform: scale(1.05);
+}
+
+.middle-board {
+    display: flex;
+}
+
+.middle-board-inner {
+    background-color: #fff;
+    border-radius: 20px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+    width: 550px;
+    transition: transform 100ms ease-in-out,
+        background-color 100ms ease-in-out;
+}
+
+.middle-board-inner p,
+.middle-board-inner h2 {
+    background-color: #fff;
+    transition: background-color 100ms ease-in-out;
+    color: #000;
+}
+
+.middle-board-inner:hover p,
+.middle-board-inner:hover h2,
+.middle-board-inner:hover {
+    background-color: #2A3647;
+    color: white;
+    transform: scale(1.05);
+}
+
+.urgent-container,
+.done,
+.to-do {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    cursor: pointer;
+}
+
+.urgent-inner-container,
+.done-inner-container,
+.todo-inner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 0 20px;
+    color: #000;
+}
+
+#urgent-number {
+    font-size: 47px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.welcoming h3 {
+    font-size: 47px;
+    font-weight: 500;
+    color: #2A3647;
+    margin-bottom: 0;
+}
+
+#greeting {
+    font-size: 47px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0;
+    animation: changeColor 1000ms ease-in-out 500ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes changeColor {
+    0% {
+        color: #fff;
+    }
+
+    100% {
+        color: #2A3647;
+    }
+}
+
+.welcoming h4,
+#greetUser {
+    color: #29ABE2;
+    font-size: 64px;
+    font-weight: 700;
+    margin: 0;
+}
+
+#todo-number,
+#done-number {
+    font-size: 59px;
+    font-weight: 600;
+    margin: 0;
+    color: #000;
+}
+
+.urgent-inner-container p,
+.todo-inner-container p,
+.done-inner-container p {
+    margin: 0;
+    color: #2A3647;
+    background-color: #fff;
+    transition: background-color 100ms ease-in-out;
+}
+
+.vertical-line {
+    height: 100px;
+    background-color: #d1d1d1;
+    margin: 0;
+    border: none;
+    width: 2.5px;
+}
+
+.upcoming-date h2 {
+    color: #2A3647;
+    margin-bottom: 0;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.upcoming-date p {
+    color: #2A3647;
+    font-size: 16px;
+}
+
+.bottom-board {
+    display: flex;
+    gap: 35px;
+    width: 550px;
+}
+
+.box-shadow {
+    -webkit-box-shadow: 0px 0px 8px 5px rgba(209, 209, 209, 0.39);
+    box-shadow: 0px 0px 8px 5px rgba(209, 209, 209, 0.39);
+}
+
+.to-do,
+.done {
+    width: 273.5px;
+    background-color: #fff;
+    border-radius: 20px;
+    height: 150px;
+    transition: transform 100ms ease-in-out,
+        background-color 100ms ease-in-out;
+}
+
+.to-do:hover,
+.to-do:hover p,
+.done:hover p,
+.done:hover {
+    color: #fff;
+    transform: scale(1.05);
+    background-color: #2A3647;
+}

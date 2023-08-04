@@ -1,0 +1,740 @@
+body {
+    background-color: #F6F7F8;
+    height: 100vh;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    background-color: #F6F7F8;
+    height: calc(100vh - 90px);
+    width: calc(100% - 232px);
+    position: relative;
+
+}
+
+.content {
+    margin: 50px 85px 0 135px;
+    max-height: fit-content
+}
+
+h1 {
+    font-size: 61px;
+    margin-bottom: 60px;
+    font-weight: 700;
+}
+
+.taskBoard {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.taskBoardLeft {
+
+    font-size: 21px;
+    font-weight: 400;
+
+}
+
+.dividingHR {
+    width: 0px;
+    height: auto;
+    max-height: 1000px;
+    border: 1px solid #D1D1D1;
+
+}
+
+.taskBoardLeft textarea {
+    height: 119px;
+    width: 422px;
+    border-radius: 10px;
+    padding: 13px 21px 13px 21px;
+    color: #D1D1D1;
+    border: 1px solid #D1D1D1;
+    font-size: 21px;
+    line-height: 120%;
+    outline: none;
+    resize: none;
+}
+
+.taskBoardRight {
+
+    display: flex;
+    flex-direction: column;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+
+}
+
+
+form label {
+    margin-bottom: 10px;
+}
+
+input {
+    width: 422px;
+    border-radius: 10px;
+    padding: 13px 21px 13px 21px;
+    color: #000000;
+    border: 1px solid #D1D1D1;
+    font-size: 21px;
+    line-height: 120%;
+    outline: none;
+    resize: none;
+
+}
+
+.hiddenInput {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+}
+
+.priorities {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    margin-bottom: 0 !important;
+}
+
+
+.priority {
+
+    margin-right: 10px;
+    border-radius: 10px;
+    box-shadow: -2px 0px 6px rgba(0, 0, 0, 0.25);
+}
+
+.priority:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    box-shadow: -2px 0px 6px rgba(0, 0, 0, 0.25);
+
+}
+
+.arrDown {
+    height: 9px;
+    width: 13px;
+    position: absolute;
+    top: 24px;
+    right: 10px
+}
+
+.newContactImg {
+    height: 7px;
+    width: 7px
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 422px;
+    height: 26px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 13px 21px;
+    color: #000000;
+    border: 1px solid #D1D1D1;
+    margin-bottom: 0 !important;
+
+
+}
+.dropdownAssigned {
+    position: relative;
+    display: inline-block;
+    width: 422px;
+    height: 26px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 13px 21px;
+    color: #000000;
+    border: 1px solid #D1D1D1;
+    margin-bottom: 0 !important;
+
+
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: -1px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #D1D1D1;
+    border: 1px solid;
+    border-radius: 10px;
+    z-index: 1;
+    padding-top: 10px;
+    margin-bottom: 15px !important;
+    border-top: none;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #000000;
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    border-top: none;
+}
+
+.dropdownAssigned:hover .dropdown-content {
+    display: block;
+    border-top: none;
+}
+
+
+.colorPickers {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    margin-bottom: 0 !important;
+}
+
+.colorPicker {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    margin-right: 15px;
+    margin-bottom: 0 !important;
+
+}
+
+/* new assigned category value */
+
+.assignedCategoryValues {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.colorPickerAssigned {
+    margin-left: 20px;
+}
+
+hr {
+    background-color: #9e9c9c;
+    transform: rotate(90deg);
+    height: 1px;
+    width: 30px;
+    position: absolute;
+    right: 7%;
+    top: 20%;
+    border: none;
+}
+
+.closeHiddenInput {
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    right: 62px;
+    top: 18px;
+}
+
+.createInHiddenInput {
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    right: 18px;
+    top: 17px;
+}
+
+.headerForSelectionField {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+.addSubtaskButton {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 17px;
+    right: 5%
+}
+
+.addSubTask {
+    position: relative;
+
+}
+
+.buttonsCreateTask {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    font-size: 21px;
+    font-weight: 400;
+    margin: 0 90px 90px 0
+}
+
+.buttonCreateTask {
+    display: flex;
+    align-items: center;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 21px;
+    border: none;
+}
+
+.buttonCreateTask:hover {
+    cursor: pointer;
+    background-color: #29ABE2;
+    transition: 75ms ease-in-out;
+    border: none;
+}
+
+.buttonClearTask {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    padding: 0 15px;
+    border-radius: 10px;
+    border: 2px solid rgba(42, 54, 71, 1);
+    color: rgba(42, 54, 71, 1);
+    font-size: 21px;
+    background-color: #F6F7F8
+}
+
+.buttonClearTask:hover {
+    cursor: pointer;
+    border-color: #29ABE2;
+    color: #29ABE2;
+
+}
+
+.createTaskPageImg {
+    margin-left: 15px;
+}
+
+.clearTaskPageImg {
+    margin-left: 15px;
+    font-size: 36px;
+    transform: rotate(45deg);
+}
+
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F0F0F0;
+    width: 15px
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(42, 54, 71, 1);
+    border-radius: 10px;
+
+
+}
+
+.priorityImg {
+    height: 50px;
+    border-radius: 10px;
+
+}
+
+.priorityImg:hover {
+    cursor: pointer;
+    box-shadow: -5px 4px rgba(130, 130, 130, 0.21);
+    border: none
+}
+
+.subtasksDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.displayNone {
+    display: none;
+}
+
+.addedSubtask {
+    width: 5px;
+    height: 20px;
+    font-size: 18px;
+}
+
+.checkBoxDiv {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.subtaskLabel {
+    margin-bottom: 5px !important;
+}
+
+.taskAddedPopUp {
+    width: 100%;
+    animation: taskAddedPopUp ease-in 3s;
+
+}
+
+.taskAddedPopUp span {
+    margin-left: 40%;
+    border-radius: 10px;
+    background-color: #2A3647;
+    padding: 30px;
+    width: 20%;
+    color: white;
+    font-size: 26px;
+}
+
+.droppedContacts {
+
+
+    margin-bottom: 3px;
+    position: relative;
+}
+
+.droppedContacts input {
+    position: absolute;
+    left: 30%;
+    top: 35%;
+    margin-right: 30%;
+}
+
+@keyframes taskAddedPopUp {
+
+    0% {
+        transform: translateY(0vh);
+
+    }
+
+    50% {
+        transform: translateY(-40vh);
+
+    }
+
+    100% {
+        transform: translateY(-40vh);
+
+    }
+}
+
+
+@media(max-width:800px) {
+
+
+    h1 {
+        text-align: center;
+        margin-top: 20%;
+        font-size: 30px;
+    }
+
+    .wrapper {
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .content {
+        margin: 60px 20px;
+        justify-content: center;
+    }
+
+    input {
+        width: 88%
+    }
+
+    .taskBoard textarea {
+        width: 88%;
+        height: 50px
+    }
+
+    .taskBoard {
+        display: flex;
+        flex-direction: column !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dividingHR {
+        display: none;
+    }
+
+    hr {
+        display: none;
+    }
+
+    .dropdown {
+        width: 88%
+    }
+    .dropdownAssigned {
+        width: 88%
+    }
+
+    .dropdown-content {
+        width: 100%
+    }
+
+    .taskBoardLeft {
+        width: 90%
+    }
+
+    .taskBoardRight {
+        width: 90%;
+    }
+
+    .addSubtaskButton {
+        right: 7%
+    }
+
+    .buttonsCreateTask {
+        margin: 0;
+
+        justify-content: center;
+    }
+
+    .buttonsCreateTask {
+        margin-bottom: 30% !important;
+    }
+
+
+    .droppedContacts input {
+        left: 40%
+    }
+
+    .dividingHR {
+        display: none;
+    }
+
+    .priorityImg {
+        width: 30%
+    }
+
+    .selectedCategoryInputValue {
+        font-size: 18px;
+        position: relative;
+        height: 100%;
+        padding: 21px;
+        width: 102%;
+
+    }
+
+
+    .hiddenInput {
+        position: absolute;
+        left: -1px;
+        top: -2px;
+        right: 0;
+        bottom: -1;
+        width: 87%;
+    }
+
+    .createInHiddenInput {
+        height: 18px;
+        width: 18px;
+        position: absolute;
+        right: -12%;
+        top: 26%;
+    }
+
+    .closeHiddenInput {
+        height: 18px;
+        width: 18px;
+        position: absolute;
+        right: 2%;
+        top: 27%;
+    }
+}
+
+
+@media(min-width:800px) and (max-width:1000px) {
+    .wrapper {
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .content {
+        margin: 60px 20px;
+
+    }
+
+    input {
+        width: 70% !important;
+    }
+
+
+    .taskBoard textarea {
+        width: 70%
+    }
+
+    .dropdown {
+        width: 70%
+    }
+    .dropdownAssigned {
+        width: 70%
+    }
+
+    .dropdown-content {
+        width: 100%
+    }
+
+
+    .addSubtaskButton {
+        right: 25%
+    }
+
+    .buttonsCreateTask {
+        margin-bottom: 80% !important;
+        padding: 10px 5px
+    }
+
+    .droppedContacts input {
+        left: 50%
+    }
+
+
+}
+
+@media(min-width:500px)and (max-width:1000px) {
+    .dividingHR {
+        display: none;
+    }
+
+    .priorityImg {
+        width: 30%
+    }
+}
+
+@media(min-width:500px)and (max-width:800px) {
+    .selectedCategoryInputValue {
+        width: 107%;
+    }
+
+    .priorityImg {
+        width: 20%
+    }
+}
+
+@media(min-width:800px)and (max-width:850px) {
+    .selectedCategoryInputValue {
+        width: 83% !important;
+    }
+
+    .createInHiddenInput {
+
+        right: 3%;
+    }
+
+    .closeHiddenInput {
+        right: 16%;
+    }
+
+    hr {
+        right: 7%;
+    }
+}
+
+@media(min-width:750px)and (max-width:800px) {
+    .selectedCategoryInputValue {
+        width: 108% !important;
+    }
+}
+
+@media(min-width:850px)and (max-width:1000px) {
+    .selectedCategoryInputValue {
+        width: 83% !important;
+    }
+
+    .createInHiddenInput {
+        right: 3%;
+    }
+
+    .closeHiddenInput {
+        right: 17%;
+    }
+}
+
+@media(min-width:1000px)and (max-width:1300px) {
+    h1 {
+        margin-left: 30px;
+    }
+
+    .addSubtaskButton {
+        right: 25%
+    }
+
+    .dividingHR {
+        display: none;
+    }
+
+    input {
+        width: 70% !important;
+    }
+
+
+    .taskBoard textarea {
+        width: 70%
+    }
+
+    .dropdown {
+        width: 70%
+    }
+    .dropdownAssigned {
+        width: 70%
+    }
+
+    .content {
+        margin: 0
+    }
+
+    .selectedCategoryInputValue {
+        width: 83% !important;
+    }
+
+    .createInHiddenInput {
+        right: 3%;
+    }
+
+    .closeHiddenInput {
+        right: 17%;
+    }
+
+}
+
+@media(min-width:240px) and (max-width:450px) {
+    .priorityImg {
+        width: 36%;
+        height: 40px;
+    }
+
+    .addSubtaskButton {
+        right: 0
+    }
+}

@@ -1,0 +1,144 @@
+<div id="addTaskPopUp" class="wrapperPopUpTask">
+    <div class="contentPopUpTask">
+        <div class="taskPopUpHeader">
+            <h1>Add Task</h1>
+            <img onclick="closePopUpAddTask()" class="closePopUp" src="../../assets/img/closeButtonBoard.png">
+        </div>
+
+        <form  onsubmit="addToTasks(); setTimeout(function() { window.location.reload(); }, 3000); return false" class="taskBoardPopUpTask">
+
+
+            <div class="taskBoardLeftPopUpTask">
+                <div><!--Title container-->
+                    <label>Title</label>
+                    <input id="task" type="text" placeholder="Enter a title" required>
+                </div>
+
+                <div><!--Title container-->
+                    <label>Description</label>
+                    <textarea id="description" required style="color: #000000;" required type="text"
+                        placeholder="Enter a description"></textarea>
+                </div>
+
+                <div class="categoryContainer"> <!--Category container-->
+                    <label>Category</label>
+
+                    <div class="dropdown">
+                        <div class="headerForSelectionField">
+                            <label id="labelCategory">Select task category</label>
+                            <img class="arrDown" src="./assets/img/arrDown.png">
+                            <!--Hidden input category-->
+                            <div id="hiddenInputCategory" class="hiddenInput displayNone">
+
+                                <input id="selectedCategoryInputValue" style="position: relative;"
+                                    placeholder="New category name">
+                                <img onclick="closeHiddenInput()" class="closeHiddenInput"
+                                    src="./assets/img/closeButtonBoard.png">
+                                <hr>
+                                <img class="createInHiddenInput" onclick="addCategoryOnTask()"
+                                    src="./assets/img/check.png">
+
+
+                                <div class="colorPickers">
+                                    <div onclick="addCategoryColorOnTask(1)" id="color1" class="colorPicker"
+                                        style="background-color:#8AA4FF;"></div>
+                                    <div onclick="addCategoryColorOnTask(2)" id="color2" class="colorPicker"
+                                        style="background-color:#FF0000;"></div>
+                                    <div onclick="addCategoryColorOnTask(3)" id="color3" class="colorPicker"
+                                        style="background-color:#2AD300 ;"></div>
+                                    <div onclick="addCategoryColorOnTask(4)" id="color4" class="colorPicker"
+                                        style="background-color:#FF8A00 ;"></div>
+                                    <div onclick="addCategoryColorOnTask(5)" id="color5" class="colorPicker"
+                                        style="background-color:#E200BE ;"></div>
+                                    <div onclick="addCategoryColorOnTask(6)" id="color6" class="colorPicker"
+                                        style="background-color:#0038FF ;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dropdownCategory" class="dropdown-content">
+                            <a onclick="openInputAddCategory()" href="#">Add category</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contactContainer"> <!--Assigned to container-->
+                    <label>Assigned to</label>
+                    <div id="eventLisPopUp" class="dropdownAssigned">
+                        <div onclick="contactList()" class="headerForSelectionField">
+                            <label style="position: relative;">Select contacts</label>
+                            <img class="arrDown" src="./assets/img/arrDown.png">
+                            <div>
+                                <input id="hiddenInputAddContact" class="hiddenInput displayNone"
+                                    placeholder="New category name"> <!--Hidden input addContact-->
+
+                            </div>
+
+                        </div>
+                        <div id="dropdownAddContactPopUp" class="dropdown-content">
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="dividingHRPopUp"></div>
+            <div class="taskBoardRightPopUp">
+
+                <div>
+                    <label>Due date</label>
+                    <input type="date" id="date" required />
+                </div>
+
+                <div class="prioPopUp">
+                    <label>Prio</label>
+                    <div class="prioritiesPopUpTask">
+                        <img id="prio1" value="urgent" onclick="addPriority(1)" class="priorityImg"
+                            src="./assets/img/urgentImg.png">
+                        <img id="prio2" value="medium" onclick="addPriority(2)" class="priorityImg"
+                            src="./assets/img/mediumImg.png">
+                        <img id="prio3" value="low" onclick="addPriority(3)" class="priorityImg"
+                            src="./assets/img/lowImg.png">
+                    </div>
+                </div>
+
+
+
+
+                <div>
+                    <label>Subtasks</label>
+                    <div class="addSubTaskPopUpTask">
+                        <input maxlength="35" id="subtaskPopUp" placeholder="Add new subtask">
+                        <img class="addSubtaskButtonPopUpTask" onclick="addSubtaskOnPopUp()"
+                            class="addSubtaskButtonPopUpTask" src="./assets/img/addSubtaskButton.png">
+                    </div>
+                    <div id="subtasksPopUp" class="checkBoxSubtasksDivPopUp">
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <span></span>
+                </div>
+                <div class="buttonsCreateTaskPopUpTask">
+                    <button onclick="window.location.reload(); return false" class="buttonClearTaskPopUpTask">
+                        <span>Clear</span>
+                        <span class="clearTaskPageImgPopUpTask">+</span>
+                        <!-- <img class="clearTaskPageImg" src="./assets/img/clearTaskPage.png"> -->
+                    </button>
+                    <button type="submit" id="buttonCreateTaskPopUpTask" class="buttonCreateTaskPopUpTask">
+                        <span>Create Task</span>
+                        <img class="createTaskPageImgPopUpTask" src="./assets/img/createTaskPage.png">
+                    </button>
+                </div>
+
+        </form>
+        <div id="popUpWhenAdded" class="taskAddedPopUp displayNone"><span>Task added to board</span></div>
+    </div><!--taskBoard closed-->
+
+
+
+</div><!--content closed-->
+</div><!--wrapper closed-->
+
