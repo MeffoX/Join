@@ -2,7 +2,7 @@ function generateLeftSideNewContact() {
     return `
                     <span class="close-contact-cross-white d-none" onclick="clearContactCard()">X</span>
                     <div class="add-contact-logo" id="contact-logo">
-                        <img src="../assets/img/logo-white.png">
+                        <img src="assets/img/logo-white.png">
                     </div>
                     <span class="contact-left-headline" id="contact-left-add">Add Contact</span>
                     <span class="contact-left-better" id="contact-left-tasks">Tasks are better with a team!</span>
@@ -15,7 +15,7 @@ function generateRightSideNewContact() {
     return ` <form class="new-contact-circle-name" onsubmit="addContact(); return false;" id="new-contact-circle-name">
                         <div class="edit-contact-circle">
                             <div class="contact-circle-big contact-circle-card bg0" id="circle-new-contact">
-                                <img src="./assets/img/avatar-white.png">
+                                <img src="assets/img/avatar-white.png">
                             </div>  
                         </div>
                         <div class="contact-new-inputs" id="contact-new-inputs">
@@ -28,11 +28,11 @@ function generateRightSideNewContact() {
                                 </div>
                                 <div class="input-form-new-contact">
                                     <input required type="email" id="contactMail" placeholder ="e-mail">
-                                    <img src="../assets/img/email_input.svg">
+                                    <img src="assets/img/email_input.svg">
                                 </div>
                                 <div class="input-form-new-contact">
                                 <input required type="tel" pattern="[0-9]+" id="contactPhone" placeholder ="phone">
-                                <img src="../assets/img/icon-phone.svg">
+                                <img src="assets/img/icon-phone.svg">
                                 </div>
                             <div class="create-cancel-box" id="create-edit-content">
                                 <button type="button" class="contact-new-cancel" id="contact-new-cancel" onclick="clearContactCard()">
@@ -41,7 +41,7 @@ function generateRightSideNewContact() {
                                 </button>
                                 <button type="submit" class="contact-new-create">
                                     <span>Create Contact</span>
-                                    <img src="../assets/img/icon-check.svg">
+                                    <img src="assets/img/icon-check.svg">
                                 </button>
                             </div>
                         </div>
@@ -54,7 +54,7 @@ function generateLeftSideEditContact() {
     return `
                     <span class="close-contact-cross-white d-none" onclick="clearContactCard()">X</span>
                     <div class="add-contact-logo" id="contact-logo">
-                        <img src="../assets/img/logo-white.png">
+                        <img src="assets/img/logo-white.png">
                     </div>
                     <span class="contact-left-headline" id="contact-left-add">Edit Contact</span>
                     <div class="edit-contact-left-line" id="blue-line">
@@ -78,15 +78,15 @@ function generateRightSideEditContact(l) {
                                 </div>
                                 <div class="input-form-new-contact">
                                     <input required type="text" value="${contacts[l]['name']}" id="contactNameEdit" placeholder="${contacts[l]['name']}">
-                                    <img src="../assets/img/name_input.svg">
+                                    <img src="assets/img/name_input.svg">
                                 </div>
                                 <div class="input-form-new-contact">
                                     <input required type="email" value="${contacts[l]['email']}" id="contactMailEdit" placeholder ="${contacts[l]['email']}">
-                                    <img src="../assets/img/email_input.svg">
+                                    <img src="assets/img/email_input.svg">
                                 </div>
                                 <div class="input-form-new-contact">
                                 <input required value="${contacts[l]['phone']}" type="tel" pattern="[0-9]+" id="contactPhoneEdit" placeholder ="${contacts[l]['phone']}">
-                                <img src="../assets/img/icon-phone.svg">
+                                <img src="assets/img/icon-phone.svg">
                                 </div>
                             <div class="create-cancel-box edit-submit-box" id="create-edit-content">
                                 <button type="button" class="contact-new-cancel" id="contact-new-cancel" onclick="deleteNewContact(${l})">
@@ -127,7 +127,7 @@ function memberInfo(l){
         <h2>${contacts[l].name}</h2>
         <span>
             <a href="../addTask.html">
-                <img src="../assets/img/contact-add-task.png">
+                <img src="assets/img/contact-add-task.png">
                 Add Task
             </a>
         </span>
@@ -136,7 +136,7 @@ function memberInfo(l){
 <div class="contact-info-edit">
     <span class="contact-edit-text">Contact Information</span>
     <span class="contact-edit-popup" onclick="openEditContacts(${l})">
-        <img src="../assets/img/contact-edit.png">
+        <img src="assets/img/contact-edit.png">
         Edit Contact
     </span>
 </div>
@@ -149,8 +149,8 @@ function memberInfo(l){
 
 
 <div class="responsive-buttons d-none">
-    <img class="trash-can" src="../assets/img/delete-box.png" onclick="deleteNewContact(${l})">
-    <img class="edit-box" src="../assets/img/edit-box.png" onclick="openEditContacts(${l})">
+    <img class="trash-can" src="assets/img/delete-box.png" onclick="deleteNewContact(${l})">
+    <img class="edit-box" src="assets/img/edit-box.png" onclick="openEditContacts(${l})">
 </div>
     `;
 }

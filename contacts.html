@@ -20,8 +20,8 @@
 </head>
 
 <body onload="initContacts()">
-    <div w3-include-html="../assets/templates/header.html"></div>
-    <div w3-include-html="../assets/templates/Sidebar.html"></div>
+    <div w3-include-html="assets/templates/header.html"></div>
+    <div w3-include-html="assets/templates/Sidebar.html"></div>
     <div class="contacts">
 
         <div class="overlay-container d-none" id="overlayContainer">
@@ -47,19 +47,19 @@
                 <h2 class="better">Better with a team</h2>
                 <hr class="hr-responsive d-none">
             </div>
-            <img class="contact-info-close d-none" onclick="closeContactInfo()" src="../assets/img/black-back-arrow.png">
+            <img class="contact-info-close d-none" onclick="closeContactInfo()" src="assets/img/black-back-arrow.png">
             <div class="contact-info d-none" id="contactInfo">
             </div>
         </div>
 
         <div id="contactCreated" class="d-none">
             <span>contact created successfuly</span>
-            <img src="../assets/img/contacts-icon.svg">
+            <img src="assets/img/contacts-icon.svg">
         </div>
 
         <div class="add-new-contact">
             <button class="add-contact-button" id="addContactButton" onclick="openAddContacts()">New Contact<img
-                    src="../assets/img/icons-add-contact.svg"></button>
+                    src="assets/img/icons-add-contact.svg"></button>
         </div>
     </div>
 
