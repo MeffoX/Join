@@ -24,7 +24,7 @@ function generateRightSideNewContact() {
                                 </div>
                                 <div class="input-form-new-contact">
                                     <input required type="text" id="contactName" placeholder ="first and last name">
-                                    <img src="../assets/img/name_input.svg">
+                                    <img src="assets/img/name_input.svg">
                                 </div>
                                 <div class="input-form-new-contact">
                                     <input required type="email" id="contactMail" placeholder ="e-mail">
