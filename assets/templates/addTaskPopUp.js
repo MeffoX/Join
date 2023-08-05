@@ -78,7 +78,7 @@ function renderSubtasksOnPopUpAddTask() {
     document.getElementById('subtasksPopUp').innerHTML = ''
     subtasksToSave.forEach((subtask, index) => {
         document.getElementById('subtasksPopUp').innerHTML += `<div class="checkBoxDiv">
-        <label class="subtaskLabel">${subtask.subtask}</label><img src=".././assets/img/closeButtonBoard.png" onclick="deleteSubtask(${index})">
+        <label class="subtaskLabel">${subtask.subtask}</label><img src="./assets/img/closeButtonBoard.png" onclick="deleteSubtask(${index})">
         </div>`
     })
 }

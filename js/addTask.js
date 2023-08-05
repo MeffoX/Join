@@ -308,7 +308,7 @@ function renderSubtasksOnAddTask() {
     document.getElementById('subtasksOnAddTask').innerHTML = ''
     subtasksToSave.forEach((subtask, index) => {
         document.getElementById('subtasksOnAddTask').innerHTML += `<div class="checkBoxDiv">
-        <label class="subtaskLabel">${subtask.subtask}</label><img src=".././assets/img/closeButtonBoard.png" onclick="deleteSubtask(${index})">
+        <label class="subtaskLabel">${subtask.subtask}</label><img src="./assets/img/closeButtonBoard.png" onclick="deleteSubtask(${index})">
         </div>`
     })
 }
