@@ -143,7 +143,10 @@ function openEditTaskHTML(i) {
 }
 
 
-
+/**
+ * Updates the dropdown content for mobile devices based on the task's readiness state of "toDo".
+ * @param {number} i - The index of the task.
+ */
 function ifStatusToDoForMobile(i) {
     let statuses = document.getElementById(`dropdown-contentForMobileDevices${i}`)
 
@@ -158,6 +161,10 @@ function ifStatusToDoForMobile(i) {
 }
 
 
+/**
+ * Updates the dropdown content for mobile devices based on the task's readiness state of "inProgress".
+ * @param {number} i - The index of the task.
+ */
 function ifStatusInProgressForMobile(i) {
     let statuses = document.getElementById(`dropdown-contentForMobileDevices${i}`)
 
@@ -172,6 +179,10 @@ function ifStatusInProgressForMobile(i) {
 }
 
 
+/**
+ * Updates the dropdown content for mobile devices based on the task's readiness state of "awaitingFeedback".
+ * @param {number} i - The index of the task.
+ */
 function ifStatusAwaitingFeedbackForMobile(i) {
     let statuses = document.getElementById(`dropdown-contentForMobileDevices${i}`)
 
@@ -186,6 +197,10 @@ function ifStatusAwaitingFeedbackForMobile(i) {
 }
 
 
+/**
+ * Updates the dropdown content for mobile devices based on the task's readiness state of "done".
+ * @param {number} i - The index of the task.
+ */
 function ifStatusDoneForMobile(i) {
     let statuses = document.getElementById(`dropdown-contentForMobileDevices${i}`)
 
@@ -201,6 +216,12 @@ function ifStatusDoneForMobile(i) {
 }
 
 
+/**
+ * Renders the assigned contacts on a board with a specific color.
+ * @param {number} i - The index of the task.
+ * @param {string} colorCircle - The ID of the color element.
+ * @param {string} contact - The contact's name.
+ */
 function HTMLforRenderAssignedContactsOnBoard(i, colorCircle, contact) {
     let element = document.getElementById(`colors${colorCircle}`);
     let backgroundColorCircle = element.style.backgroundColor;
@@ -208,6 +229,12 @@ function HTMLforRenderAssignedContactsOnBoard(i, colorCircle, contact) {
 }
 
 
+/**
+ * Renders the full card of assigned contacts with a specific color.
+ * @param {number} i - The index of the task.
+ * @param {string} colorCircle - The ID of the color element.
+ * @param {string} contact - The contact's name.
+ */
 function HTMLforRenderAssignedContactsOnFullCard(i, colorCircle, contact) {
     let element = document.getElementById(`colors${colorCircle}`);
     let backgroundColorCircle = element.style.backgroundColor;

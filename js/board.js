@@ -364,7 +364,7 @@ function listenToEvent(i) {
             contactList.addEventListener('mouseenter', function () {
                 dropdownAddContact.innerHTML = ''
                 contacts.forEach((contact, index) => {
-                    dropdownAddContact.innerHTML += `<div class="droppedContacts"><a>${contact.name}</a><input onclick="addDeleteReassignedContacts(${i},${index})" id="checkboxAssigned${index}"  type="checkbox"></div>`;
+                    dropdownAddContact.innerHTML += `<div class="droppedContacts"><a>${contact.name}</a><input onclick="addDeleteReassignedContacts(${i},${index})" id="checkboxAssigned${index}" type="checkbox"></div>`;
                 });
                 checkForCheckedAssigned(i)
             });
