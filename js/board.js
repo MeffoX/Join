@@ -42,10 +42,13 @@ async function initBoard() {
 function renderTaskCards(i, j) {
     clearSubsections()
 
-    let search = filterTasks()
+    let search = filterTasks();
     j = 0;
     for (i = 0; i < tasks.length; i++) {
-        if (tasks[i].title.toLowerCase().includes(search)) {
+        let taskTitle = tasks[i].title.toLowerCase();
+        let taskDescription = tasks[i].description.toLowerCase(); // Assuming tasks[i] has a description property
+
+        if (taskTitle.includes(search) || taskDescription.includes(search)) { // Searches both title and description
             checkForReadiness(i, j)
             document.getElementById('progressBar' + i).style.background = tasks[i].colorOfBar
             renderAssignedContactsOnBoard(i)
@@ -54,6 +57,7 @@ function renderTaskCards(i, j) {
         }
     }
 }
+
 
 
 /**
@@ -286,23 +290,20 @@ function clearSubsections() {
  * @param {number} j - Order of the task in the rendered list.
  */
 function checkForReadiness(i, j) {
-    if (tasks[i].readinessState == 'toDo') {
-        document.getElementById('boardSubsectionToDo').innerHTML += HTMLrenderTaskCards(i, j)
-        priorityImageForRenderTaskCards(i, j)
-    }
-    if (tasks[i].readinessState == 'inProgress') {
-        document.getElementById('boardSubsectionInProgress').innerHTML += HTMLrenderTaskCards(i, j)
-        priorityImageForRenderTaskCards(i, j)
-    }
-    if (tasks[i].readinessState == 'awaitingFeedback') {
-        document.getElementById('boardSubsectionFeedback').innerHTML += HTMLrenderTaskCards(i, j)
-        priorityImageForRenderTaskCards(i, j)
-    }
-    if (tasks[i].readinessState == 'done') {
-        document.getElementById('boardSubsectionDone').innerHTML += HTMLrenderTaskCards(i, j)
-        priorityImageForRenderTaskCards(i, j)
+    let readinessMappings = {
+        'toDo': 'boardSubsectionToDo',
+        'inProgress': 'boardSubsectionInProgress',
+        'awaitingFeedback': 'boardSubsectionFeedback',
+        'done': 'boardSubsectionDone'
+    };
+
+    let sectionId = readinessMappings[tasks[i].readinessState];
+    if (sectionId) {
+        document.getElementById(sectionId).innerHTML += HTMLrenderTaskCards(i, j);
+        priorityImageForRenderTaskCards(i, j);
     }
 }
+
 
 
 /**

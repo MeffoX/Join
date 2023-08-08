@@ -62,26 +62,22 @@ function adjustMedia() {
  * Focus links on sidebar if corresponding page is displayed.
  */
 function focusSidebar() {
-    const pathName = window.location.pathname;
+    let pathName = window.location.pathname;
 
-    switch (pathName) {
-        case '/summary.html':
-            document.getElementById('summary-props').classList.add('clicked');
-            break;
-        case '/board.html':
-            document.getElementById('board-props').classList.add('clicked');
-            break;
-        case '/addTask.html':
-            document.getElementById('addTask-props').classList.add('clicked');
-            break;
-        case '/contacts.html':
-            document.getElementById('contacts-props').classList.add('clicked');
-            break;
-        case '/legal-notice.html':
-            document.getElementById('legal-props').classList.add('clicked');
-            break;
+    let mappings = {
+        '/Join/summary.html': 'summary-props',
+        '/Join/board.html': 'board-props',
+        '/Join/addTask.html': 'addTask-props',
+        '/Join/contacts.html': 'contacts-props',
+        '/Join/legal-notice.html': 'legal-props'
+    };
+
+    let elementId = mappings[pathName];
+    if (elementId) {
+        document.getElementById(elementId).classList.add('clicked');
     }
 }
+
 
 
 /**

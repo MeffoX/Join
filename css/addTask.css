@@ -18,6 +18,10 @@ body {
 
 }
 
+input[type="checkbox"] {
+    transform: scale(1.5);
+}
+
 .content {
     margin: 50px 85px 0 135px;
     max-height: fit-content

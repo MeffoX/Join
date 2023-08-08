@@ -575,10 +575,15 @@ textarea {
     padding: 10px;
     overflow-y: scroll;
     z-index: 200;
+    box-shadow: inset 1px -1px 1px 1px #d5d5d5;
 }
 
 label:hover {
     cursor: pointer;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
 }
 
 
@@ -757,9 +762,30 @@ label:hover {
    
 }
 
+@media(max-width:410px) {
+    .dueDate {
+        white-space: nowrap;
+    }
+
+    .closeButtondialogFullCard {
+        top: 12%;
+    }
+
+    .categoryDialog {
+        margin-top: 90px;
+    }
+
+    .wrapperDialogHead {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+   
+}
+
 @media(min-width:350px) and (max-width:700px) {
     .closeButtondialogFullCard {
-        top: 9%;
         height: 20px
     }
 
