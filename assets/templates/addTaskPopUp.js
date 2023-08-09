@@ -8,6 +8,7 @@ let prioImagesFullCard = ['./assets/img/urgentOnclick.png', './assets/img/medium
 let tasksToEdit = []
 let subtasksToSave = []
 let date = new Date();
+let currentColumn = "";
 contacts = []
 
 
@@ -21,37 +22,46 @@ function disableButtonAddTask() {
 }
 
 async function addToTasks() {
+    const getValue = id => document.getElementById(id).value;
 
-    let title = document.getElementById('task');
-    let description = document.getElementById('description');
-    let date = document.getElementById('date');
-    let subtasks = subtasksToSave.splice(0, subtasksToSave.length)
-    let category = document.getElementById('selectedCategoryInputValue');
-    let assignedTo = assignedContacts.splice(0, assignedContacts.length)
-    let prio = prios.slice(0).toString()
-    let colorCategory = colorsCategory.slice(0).toString()
-
-
-    let task = {
-        title: title.value,
-        description: description.value,
-        category: category.value,
-        colorCategory,
-        assignedTo: assignedTo.value,
-        date: date.value,
-        prio,
-        subtasks,
-        readinessState: 'toDo',
-        assignedTo,
+    const task = {
+        title: getValue('task'),
+        description: getValue('description'),
+        category: getValue('selectedCategoryInputValue'),
+        colorCategory: colorsCategory.slice(0).toString(),
+        assignedTo: assignedContacts.splice(0, assignedContacts.length),
+        date: getValue('date'),
+        prio: prios.slice(0).toString(),
+        subtasks: subtasksToSave.splice(0, subtasksToSave.length),
+        readinessState: currentColumn,
         pace: 0
     };
 
-    clearValuesOfAddTask(title, description, category, assignedTo, date)
+    createTaskInColumn(task, currentColumn);
+    clearValuesOfAddTask(task.title, task.description, task.category, task.assignedTo, task.date);
     tasks.push(task);
-    disableButtonAddTask()
-    await backend.setItem('tasks', JSON.stringify(tasks))
-    popTheAddedDesk()
+    disableButtonAddTask();
+    await backend.setItem('tasks', JSON.stringify(tasks));
+    popTheAddedDesk();
+
+    currentColumn = "";
 }
+
+function createTaskInColumn(task, column) {
+    let taskDiv = document.createElement("div");
+    taskDiv.className = "taskDiv";
+    taskDiv.innerHTML = `<h3>${task.title}</h3><p>${task.description}</p>`;
+    
+    let columnMapping = {
+        'toDo': 'boardSubsectionToDo',
+        'inProgress': 'boardSubsectionInProgress',
+        'awaitingFeedback': 'boardSubsectionFeedback',
+        'done': 'boardSubsectionDone',
+    };
+
+    document.getElementById(columnMapping[column]).appendChild(taskDiv);
+}
+
 
 
 function addSubtaskOnPopUp() {
@@ -84,10 +94,11 @@ function renderSubtasksOnPopUpAddTask() {
 }
 
 
-function openPopUpAddTask() {
+function openPopUpAddTask(column) {
 
     document.getElementById('addTaskPopUp').classList.add('openPopUp')
     document.getElementById(`date`).setAttribute("min", date.toISOString().split("T")[0]);
+    currentColumn = column;
 }
 
 

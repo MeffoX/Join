@@ -109,6 +109,8 @@ async function addToTasks() {
     let task = await createTask(data);
     await saveTask(task);
     popTheAddedDesk();
+
+    window.location.href = 'board.html';
 }
 
 

@@ -46,7 +46,7 @@
                 <div class="boardSubsections">
                     <div class="boardSubsectionHeader">
                         <h2>To do</h2>
-                        <img class="plusButton" onclick="openPopUpAddTask()" src="./assets/img/plusButtonBoard.png">
+                        <img class="plusButton" onclick="openPopUpAddTask('toDo')" src="./assets/img/plusButtonBoard.png">
                     </div>
                     <div ondrop="moveTo('toDo')" ondragover="allowDrop(event)" id="boardSubsectionToDo"
                         class="boardSubsection">
@@ -56,7 +56,7 @@
                 <div class="boardSubsections">
                     <div class="boardSubsectionHeader">
                         <h2>In progress</h2>
-                        <img class="plusButton" onclick="openPopUpAddTask()" src="./assets/img/plusButtonBoard.png">
+                        <img class="plusButton" onclick="openPopUpAddTask('inProgress')" src="./assets/img/plusButtonBoard.png">
                     </div>
                     <div ondrop="moveTo('inProgress')" ondragover="allowDrop(event)" id="boardSubsectionInProgress"
                         class="boardSubsection">
@@ -66,7 +66,7 @@
                 <div class="boardSubsections">
                     <div class="boardSubsectionHeader">
                         <h2>Awaiting Feedback</h2>
-                        <img class="plusButton" onclick="openPopUpAddTask()" src="./assets/img/plusButtonBoard.png">
+                        <img class="plusButton" onclick="openPopUpAddTask('awaitingFeedback')" src="./assets/img/plusButtonBoard.png">
                     </div>
                     <div ondrop="moveTo('awaitingFeedback')" ondragover="allowDrop(event)" id="boardSubsectionFeedback"
                         class="boardSubsection">
@@ -76,7 +76,7 @@
                 <div class="boardSubsections">
                     <div class="boardSubsectionHeader">
                         <h2>Done</h2>
-                        <img class="plusButton" onclick="openPopUpAddTask()" src="./assets/img/plusButtonBoard.png">
+                        <img class="plusButton" onclick="openPopUpAddTask('done')" src="./assets/img/plusButtonBoard.png">
                     </div>
                     <div ondrop="moveTo('done')" ondragover="allowDrop(event)" id="boardSubsectionDone"
                         class="boardSubsection">
