@@ -27,6 +27,7 @@ async function initAddTask() {
         contacts = JSON.parse(backend.getItem('contacts')) || [];
         document.getElementById("date").setAttribute("min", date.toISOString().split("T")[0])
         contactList()
+        addPriority(2)
     } catch (er) {
         console.error(er)
     }

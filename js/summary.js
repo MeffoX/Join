@@ -176,7 +176,7 @@ async function setTaskStates(taskReadinessState) {
             inProgress.push(taskReadinessState);
             await backend.setItem('InProgress', JSON.stringify(inProgress));
             break;
-        case 'awaitingProgress':
+        case 'awaitingFeedback':
             awaitingFeedback.push(taskReadinessState);
             await backend.setItem('AwaitingFeedback', JSON.stringify(awaitingFeedback));
             break;

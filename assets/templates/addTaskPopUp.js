@@ -21,6 +21,7 @@ function disableButtonAddTask() {
     }, 3000);
 }
 
+
 async function addToTasks() {
     const getValue = id => document.getElementById(id).value;
 
@@ -47,6 +48,7 @@ async function addToTasks() {
     currentColumn = "";
 }
 
+
 function createTaskInColumn(task, column) {
     let taskDiv = document.createElement("div");
     taskDiv.className = "taskDiv";
@@ -61,7 +63,6 @@ function createTaskInColumn(task, column) {
 
     document.getElementById(columnMapping[column]).appendChild(taskDiv);
 }
-
 
 
 function addSubtaskOnPopUp() {
@@ -99,6 +100,7 @@ function openPopUpAddTask(column) {
     document.getElementById('addTaskPopUp').classList.add('openPopUp')
     document.getElementById(`date`).setAttribute("min", date.toISOString().split("T")[0]);
     currentColumn = column;
+    addPriority(2);
 }
 
 
@@ -280,7 +282,3 @@ function checkForCheckedAssignedPopUp() {
         });
     });
 }
-
-
-
-
