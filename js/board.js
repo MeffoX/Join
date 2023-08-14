@@ -186,13 +186,15 @@ function openEditTask(i) {
 }
 
 
+/**
+ * Sets the image source of priority elements based on the provided priority.
+ * @param {string} priority - The priority value ('urgent', 'medium', or 'low')
+ */
 function setPriorityImage(priority) {
-    // Setze alle auf ihre Standardbilder zurück
     document.getElementById("prio4").src = "./assets/img/urgentImg.png";
     document.getElementById("prio5").src = "./assets/img/mediumImg.png";
     document.getElementById("prio6").src = "./assets/img/lowImg.png";
 
-    // Je nach ausgewählter Priorität das passende Bild ändern
     if (priority === 'urgent') {
         document.getElementById("prio4").src = "./assets/img/urgentOnclick.png";
     } else if (priority === 'medium') {
@@ -203,8 +205,6 @@ function setPriorityImage(priority) {
         console.error("Ungültiger Prio-Wert:", priority);
     }
 }
-
-
 
 
 /**
@@ -323,7 +323,6 @@ function checkForReadiness(i, j) {
         priorityImageForRenderTaskCards(i, j);
     }
 }
-
 
 
 /**

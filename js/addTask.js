@@ -50,14 +50,27 @@ function disableButtonAddTask() {
 }
 
 
-
+/**
+ * Retrieves the color associated with a given category name.
+ * Searches the categories array for a category with the provided name.
+ * If found, returns the color of that category; otherwise, returns null.
+ * @param {string} categoryName - The name of the category.
+ * @returns {string|null} The color of the category, or null if the category is not found.
+ */
 function getCategoryColor(categoryName) {
     let category = categories.find(cat => cat.name === categoryName);
-    return category ? category.color : null; // Gibt die Farbe oder null zurück, falls die Kategorie nicht gefunden wird.
+    return category ? category.color : null;
 }
 
 
-
+/**
+ * Fetches and constructs a task object based on data input from the DOM.
+ * 
+ * This function gathers data from various form inputs and constructs a task object.
+ * This includes information like title, description, category, assigned contacts and subtasks.
+ * @async
+ * @returns {Object} Returns an object containing task details.
+ */
 async function getTaskData() {
     let title = document.getElementById('task');
     let description = document.getElementById('description');
@@ -235,6 +248,18 @@ function openInputAddCategory() {
 }
 
 
+/**
+ * Adds a new category to a task and updates the DOM accordingly.
+ * 
+ * This function:
+ * 1. Fetches the category name entered by the user from the form input.
+ * 2. Sets the color for the new category from the predefined color set.
+ * 3. Updates the DOM to display the selected category along with its color.
+ * 4. If the entered category does not already exist in the global `categories` list, 
+ *    it adds the new category and updates the backend with the modified categories list.
+ * @async
+ * @returns {void}
+ */
 async function addCategoryOnTask() {
     let value = document.getElementById('selectedCategoryInputValue').value;
     let color = colorsCategory[0];
@@ -258,6 +283,17 @@ async function addCategoryOnTask() {
     }
 }
 
+
+/**
+ * Updates the DOM to display the selected category with its associated color.
+ * 
+ * This function:
+ * 1. Searches for a category in the global `categories` list that matches the provided categoryName.
+ * 2. If the category is found, it updates the DOM to display the category's name and its associated color.
+ * @async
+ * @param {string} categoryName - The name of the category to be selected.
+ * @returns {void}
+ */
 async function selectCategory(categoryName) {
     let category = categories.find(cat => cat.name === categoryName);
     if (category) {
@@ -269,6 +305,12 @@ async function selectCategory(categoryName) {
 }
 
 
+/**
+ * Renders categories into a dropdown menu.
+ * This function populates the dropdown menu (identified by the 'dropdownCategory') 
+ * with the categories from the global `categories` list.
+ * @returns {void}
+ */
 function renderCategories() {
     let dropdownCategory = document.getElementById('dropdownCategory');
     dropdownCategory.innerHTML = `<a onclick="openInputAddCategory()" href="#">Add Category</a>`;
