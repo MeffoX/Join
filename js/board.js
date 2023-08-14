@@ -25,6 +25,7 @@ async function initBoard() {
         setURL("https://stefan-roth.developerakademie.net/Join/smallest_backend_ever-master");
         await downloadFromServer();
         tasks = await JSON.parse(await backend.getItem('tasks')) || []
+        categories = await JSON.parse(await backend.getItem('categories')) || []
         contacts = JSON.parse(backend.getItem('contacts')) || [];
         renderTaskCards()
 
@@ -175,12 +176,35 @@ async function renderDialogFullCard(i, colorCircle) {
  */
 function openEditTask(i) {
     let changeStatus = document.getElementById(`dropdown-contentForMobileDevices${i}`);
+    let priority = tasks[i].prio;
     changeStatus.style.display = 'none'
     document.getElementById('dialogEditCard').classList.remove('displayNone')
     document.getElementById('dialogEditCard').innerHTML = openEditTaskHTML(i)
     document.getElementById(`editedDate`).setAttribute("min", date.toISOString().split("T")[0]);
     listenToEvent(i)
+    setPriorityImage(priority);
 }
+
+
+function setPriorityImage(priority) {
+    // Setze alle auf ihre Standardbilder zurück
+    document.getElementById("prio4").src = "./assets/img/urgentImg.png";
+    document.getElementById("prio5").src = "./assets/img/mediumImg.png";
+    document.getElementById("prio6").src = "./assets/img/lowImg.png";
+
+    // Je nach ausgewählter Priorität das passende Bild ändern
+    if (priority === 'urgent') {
+        document.getElementById("prio4").src = "./assets/img/urgentOnclick.png";
+    } else if (priority === 'medium') {
+        document.getElementById("prio5").src = "./assets/img/mediumOnclick.png";
+    } else if (priority === 'low') {
+        document.getElementById("prio6").src = "./assets/img/lowOnclick.png";
+    } else {
+        console.error("Ungültiger Prio-Wert:", priority);
+    }
+}
+
+
 
 
 /**
@@ -284,23 +308,22 @@ function clearSubsections() {
  * @param {number} j - Order of the task in the rendered list.
  */
 function checkForReadiness(i, j) {
-    if (tasks[i].readinessState == 'toDo') {
-        document.getElementById('boardSubsectionToDo').innerHTML += HTMLrenderTaskCards(i, j)
-        priorityImageForRenderTaskCards(i, j)
-    }
-    if (tasks[i].readinessState == 'inProgress') {
-        document.getElementById('boardSubsectionInProgress').innerHTML += HTMLrenderTaskCards(i, j)
-        priorityImageForRenderTaskCards(i, j)
-    }
-    if (tasks[i].readinessState == 'awaitingFeedback') {
-        document.getElementById('boardSubsectionFeedback').innerHTML += HTMLrenderTaskCards(i, j)
-        priorityImageForRenderTaskCards(i, j)
-    }
-    if (tasks[i].readinessState == 'done') {
-        document.getElementById('boardSubsectionDone').innerHTML += HTMLrenderTaskCards(i, j)
-        priorityImageForRenderTaskCards(i, j)
+    const stateToElementIdMap = {
+        'toDo': 'boardSubsectionToDo',
+        'inProgress': 'boardSubsectionInProgress',
+        'awaitingFeedback': 'boardSubsectionFeedback',
+        'done': 'boardSubsectionDone'
+    };
+    
+    const currentReadinessState = tasks[i].readinessState;
+    const targetElementId = stateToElementIdMap[currentReadinessState];
+
+    if (targetElementId) {
+        document.getElementById(targetElementId).innerHTML += HTMLrenderTaskCards(i, j);
+        priorityImageForRenderTaskCards(i, j);
     }
 }
+
 
 
 /**

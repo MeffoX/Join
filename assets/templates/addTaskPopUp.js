@@ -22,14 +22,59 @@ function disableButtonAddTask() {
 }
 
 
-async function addToTasks() {
-    const getValue = id => document.getElementById(id).value;
+async function saveCategory(value, colorValue) {
+    categories.push({ name: value, color: colorValue });
+    await backend.setItem('categories', JSON.stringify(categories));
+}
 
-    const task = {
+
+function addCategoryOnTask() {
+    let value = document.getElementById('selectedCategoryInputValue').value;
+    let selectedColor = colorsCategory[0];
+
+    if (value) {
+        document.getElementById('labelCategory').innerHTML = `
+            <div class="assignedCategoryValues">
+                ${value}
+                <div class="colorPicker colorPickerAssigned" style="background-color: ${selectedColor}"  id="assignedColor"></div>
+            </div>`;
+        document.getElementById('hiddenInputCategory').classList.add('displayNone');
+        document.getElementById('dropdownCategory').style.display = 'none';
+    }
+}
+
+
+
+function getCategoryColor(categoryName) {
+    let category = categories.find(cat => cat.name === categoryName);
+    return category ? category.color : null; // Gibt die Farbe oder null zurück, falls die Kategorie nicht gefunden wird.
+}
+
+
+async function addToTasks() {
+    let getValue = id => document.getElementById(id).value;
+    let categoryName = getValue('selectedCategoryInputValue');
+    console.log("Category Name:", categoryName);
+    
+    // Überprüfen und Hinzufügen der Kategorie hier
+    let selectedColor = colorsCategory[0];
+    let existingCategory = categories.find(cat => cat.name === categoryName);
+    let categoryLabel = document.getElementById('labelCategory').textContent.trim();
+    let categoryInput = document.getElementById('selectedCategoryInputValue').value;
+    let selectedCategory = categoryInput ? categoryInput : categoryLabel;
+    let selectedColorCategory = getCategoryColor(selectedCategory);
+
+    if (!existingCategory && categoryName) {
+        existingCategory = { name: categoryName, color: selectedColor };
+        categories.push(existingCategory);
+        await backend.setItem('categories', JSON.stringify(categories));
+    }
+
+    let task = {
         title: getValue('task'),
         description: getValue('description'),
-        category: getValue('selectedCategoryInputValue'),
-        colorCategory: colorsCategory.slice(0).toString(),
+        category: selectedCategory,
+        colorCategory: selectedColorCategory,
         assignedTo: assignedContacts.splice(0, assignedContacts.length),
         date: getValue('date'),
         prio: prios.slice(0).toString(),
@@ -39,14 +84,28 @@ async function addToTasks() {
     };
 
     createTaskInColumn(task, currentColumn);
-    clearValuesOfAddTask(task.title, task.description, task.category, task.assignedTo, task.date);
+    clearValuesOfAddTask();
     tasks.push(task);
     disableButtonAddTask();
     await backend.setItem('tasks', JSON.stringify(tasks));
     popTheAddedDesk();
-
+    addCategoryOnTask();
     currentColumn = "";
 }
+
+function getValue(id) {
+    let elem = document.getElementById(id);
+    if (elem) {
+        return elem.value;
+    } else {
+        console.warn(`Element mit der ID ${id} nicht gefunden!`);
+        return null;
+    }
+}
+
+
+
+
 
 
 function createTaskInColumn(task, column) {
@@ -95,17 +154,47 @@ function renderSubtasksOnPopUpAddTask() {
 }
 
 
-function openPopUpAddTask(column) {
+function renderCategoriesInPopup() {
+    let dropdownCategory = document.getElementById('dropdownCategory');
+    dropdownCategory.innerHTML = `<a onclick="openInputAddCategory()" href="#">Add Category</a>`;
+    
+    categories.forEach(category => {
+        dropdownCategory.innerHTML += `
+            <a onclick="selectCategoryInPopup('${category.name}')" href="#">
+                ${category.name}
+                <div class="colorPicker" style="background-color: ${category.color}; border-radius: 50%;"></div>
+            </a>`;
+    });
+}
 
-    document.getElementById('addTaskPopUp').classList.add('openPopUp')
+
+function selectCategoryInPopup(categoryName) {
+    let category = categories.find(cat => cat.name === categoryName);
+    if (category) {
+        document.getElementById('labelCategory').innerHTML = `
+            ${category.name}
+            <div class="colorPicker" style="background-color: ${category.color}; border-radius: 50%;"></div>
+        `;
+    }
+}
+
+
+
+
+function openPopUpAddTask(column) {
+    document.getElementById('addTaskPopUp').classList.add('openPopUp');
     document.getElementById(`date`).setAttribute("min", date.toISOString().split("T")[0]);
     currentColumn = column;
     addPriority(2);
+    renderCategoriesInPopup(); // Laden der Kategorien beim Öffnen des Pop-ups
 }
+
+
 
 
 function closePopUpAddTask() {
     document.getElementById('addTaskPopUp').classList.remove('openPopUp')
+
 }
 
 
@@ -115,14 +204,15 @@ async function popTheAddedDesk() {
 }
 
 
-function clearValuesOfAddTask(title, description, category, assignedTo, date) {
-    title.value = '',
-        description.value = '',
-        category.value = '',
-        assignedTo.value = '',
-        date.value = '',
-        assignedContacts = []
+function clearValuesOfAddTask() {
+    document.getElementById('task').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('selectedCategoryInputValue').value = '';
+    document.getElementById('date').value = '';
+    assignedContacts = [];
 }
+
+
 
 
 async function deleteTask(i) {
@@ -198,20 +288,6 @@ function colorPrios(selectedUrgency, i) {
 }
 
 
-function addCategoryOnTask() {
-    let value = document.getElementById('selectedCategoryInputValue').value;
-    if (value) {
-        document.getElementById('labelCategory').innerHTML = '';
-        document.getElementById('labelCategory').innerHTML = `<div class="assignedCategoryValues">
-         ${value}
-          <div class="colorPicker colorPickerAssigned" style="background-color: ${colorsCategory}"  id="assignedColor"></div>
-         </div>` ;
-        document.getElementById('hiddenInputCategory').classList.add('displayNone')
-        document.getElementById('dropdownCategory').style = 'none'
-    }
-}
-
-
 function openInputAddCategory() {
     document.getElementById('selectedCategoryInputValue').value = ''
     document.getElementById('hiddenInputCategory').classList.remove('displayNone')
@@ -220,6 +296,10 @@ function openInputAddCategory() {
 
 
 
+/**
+ * Assigns a category color to a task.
+ * @param {number} i The color index.
+ */
 function addCategoryColorOnTask(i) {
     let value = document.getElementById('selectedCategoryInputValue').value;
     if (value) {
@@ -232,7 +312,6 @@ function addCategoryColorOnTask(i) {
         }
         addCategoryOnTask()
     }
-
 }
 
 
@@ -266,19 +345,4 @@ function contactList() {
     contacts.forEach((contact, index) => {
         droppedContacts.innerHTML += `<div class="droppedContacts"><a>${contact.name}</a><input id="checkboxAssigned${index}" onclick="addToAssignedContacts('${index}')" type="checkbox"></div>`;
     })
-    checkForCheckedAssignedPopUp()
-}
-
-function checkForCheckedAssignedPopUp() {
-    let checkedbox
-
-    contacts.forEach((contact, index) => {
-
-        assignedContacts.forEach(assigned => {
-            checkedbox = document.getElementById(`checkboxAssigned${index}`)
-            if (contact.email === assigned.email) {
-                checkedbox.checked = true;
-            }
-        });
-    });
 }

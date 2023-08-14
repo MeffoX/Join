@@ -116,6 +116,12 @@ form label {
     margin-bottom: 10px;
 }
 
+#labelCategory {
+    display: flex;
+    align-items: center;
+    gap: 100px
+}
+
 input {
     width: 422px !important;
     border-radius: 10px;
@@ -245,7 +251,9 @@ hr {
 }
 
 .dropdown-content a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 12px 20px;
     text-decoration: none;
     color: #000000;

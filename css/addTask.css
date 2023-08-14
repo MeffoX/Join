@@ -187,7 +187,9 @@ input {
 }
 
 .dropdown-content a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 12px 20px;
     text-decoration: none;
     color: #000000;
@@ -219,6 +221,10 @@ input {
     margin-right: 15px;
     margin-bottom: 0 !important;
 
+}
+
+#labelCategory {
+    display: contents;
 }
 
 /* new assigned category value */

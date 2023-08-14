@@ -24,10 +24,13 @@ async function initAddTask() {
         setURL("https://stefan-roth.developerakademie.net/Join/smallest_backend_ever-master");
         await downloadFromServer();
         tasks = await JSON.parse(await backend.getItem('tasks')) || []
+        categories = await JSON.parse(await backend.getItem('categories')) || []
         contacts = JSON.parse(backend.getItem('contacts')) || [];
         document.getElementById("date").setAttribute("min", date.toISOString().split("T")[0])
         contactList()
         addPriority(2)
+        categories = JSON.parse(await backend.getItem('categories')) || []
+        renderCategories()
     } catch (er) {
         console.error(er)
     }
@@ -47,31 +50,39 @@ function disableButtonAddTask() {
 }
 
 
-/**
- * Fetches task data from form.
- * @returns {Promise<Object>} An object representing task data.
- */
+
+function getCategoryColor(categoryName) {
+    let category = categories.find(cat => cat.name === categoryName);
+    return category ? category.color : null; // Gibt die Farbe oder null zurück, falls die Kategorie nicht gefunden wird.
+}
+
+
+
 async function getTaskData() {
     let title = document.getElementById('task');
     let description = document.getElementById('description');
     let date = document.getElementById('date');
-    let category = document.getElementById('selectedCategoryInputValue');
-    let assignedTo = assignedContacts.splice(0, assignedContacts.length);
-    let colorCategory = colorsCategory.slice(0).toString();
+    let categoryLabel = document.getElementById('labelCategory').textContent.trim();
+    let categoryInput = document.getElementById('selectedCategoryInputValue').value;
+    let selectedCategory = categoryInput ? categoryInput : categoryLabel;
+    let selectedColorCategory = getCategoryColor(selectedCategory);
+    let assignedTo = [...assignedContacts];
     let prio = prios.slice(0).toString();
     let subtasks = subtasksToSave.splice(0, subtasksToSave.length);
 
     return {
         title: title.value,
         description: description.value,
-        category: category.value,
-        colorCategory,
-        assignedTo: assignedTo.value,
+        category: selectedCategory,
+        colorCategory: selectedColorCategory,
+        assignedTo: assignedTo,
         date: date.value,
         prio,
         subtasks
     };
 }
+
+
 
 
 /**
@@ -95,7 +106,9 @@ async function createTask(data) {
  * @returns {Promise<void>}
  */
 async function saveTask(task) {
+    console.log(task);
     tasks.push(task);
+    categories.push(categories);
     disableButtonAddTask();
     await backend.setItem('tasks', JSON.stringify(tasks));
 }
@@ -222,20 +235,51 @@ function openInputAddCategory() {
 }
 
 
-/**
- * Assigns a category to a task.
- */
-function addCategoryOnTask() {
+async function addCategoryOnTask() {
     let value = document.getElementById('selectedCategoryInputValue').value;
+    let color = colorsCategory[0];
+
     if (value) {
-        document.getElementById('labelCategory').innerHTML = '';
-        document.getElementById('labelCategory').innerHTML = `<div class="assignedCategoryValues">
-         ${value}
-          <div class="colorPicker colorPickerAssigned" style="background-color: ${colorsCategory}"  id="assignedColor"></div>
-         </div>` ;
-        document.getElementById('hiddenInputCategory').classList.add('displayNone')
-        document.getElementById('dropdownCategory').style = 'none'
+        document.getElementById('labelCategory').innerHTML = `
+            <div class="assignedCategoryValues">
+                ${value}
+                <div class="colorPicker colorPickerAssigned" style="background-color: ${color}" id="assignedColor"></div>
+            </div>`;
+         
+        document.getElementById('hiddenInputCategory').classList.add('displayNone');
+        document.getElementById('dropdownCategory').style = 'none';
+        
+        let categoryExists = categories.some(cat => cat.name === value);
+        
+        if(!categoryExists) {
+            categories.push({ name: value, color: color });
+            await backend.setItem('categories', JSON.stringify(categories));
+        }
     }
+}
+
+async function selectCategory(categoryName) {
+    let category = categories.find(cat => cat.name === categoryName);
+    if (category) {
+        document.getElementById('labelCategory').innerHTML = `
+            ${category.name}
+            <div class="colorPicker" style="background-color: ${category.color}; border-radius: 50%;"></div>
+        `;
+    }
+}
+
+
+function renderCategories() {
+    let dropdownCategory = document.getElementById('dropdownCategory');
+    dropdownCategory.innerHTML = `<a onclick="openInputAddCategory()" href="#">Add Category</a>`;
+    
+    categories.forEach(category => {
+        dropdownCategory.innerHTML += `
+            <a onclick="selectCategory('${category.name}')" href="#">
+                ${category.name}
+                <div class="colorPicker" style="background-color: ${category.color}; border-radius: 50%;"></div>
+            </a>`;
+    });
 }
 
 

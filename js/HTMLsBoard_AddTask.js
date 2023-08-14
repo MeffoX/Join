@@ -1,4 +1,5 @@
 function HTMLrenderTaskCards(i, j) {
+    
 
     return `<div draggable="true" ondragstart="startDragging(${i})" onclick="renderDialogFullCard(${i})" class="boardCard" >
                 <div class="category" style="background-color: ${tasks[i].colorCategory}">
