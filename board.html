@@ -15,6 +15,7 @@
     <script src="./script.js"></script>
     <script src="./js/mini_backend.js"></script>
     <script src="./js/board.js"></script>
+    <script src="./js/tasks.js"></script>
     <script src="./js/HTMLsBoard_AddTask.js"></script>
     <script src="./js/contacts.js"></script>
     <script src="./assets/templates/addTaskPopUp.js"></script>
@@ -113,5 +114,42 @@
     </div><!--wrapper closed-->
 
 </body>
+
+<script>
+        
+    document.addEventListener('DOMContentLoaded', function() {
+    
+    document.getElementById('dialogFullCard').addEventListener('click', function(e) {
+        if (e.target.id !== 'dialogFullCardContent' && 
+            !document.getElementById('dialogFullCardContent').contains(e.target)) {
+            closeTask();
+        }
+    });
+    closeTask();
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    
+    document.getElementById('dialogEditCard').addEventListener('click', function(e) {
+        if (e.target.id !== 'entireEditTaskCard' && 
+            !document.getElementById('entireEditTaskCard').contains(e.target)) {
+            closeTask();
+            closeEditCard();
+        }
+    });
+    closeTask();
+    closeEditCard();
+    });
+
+    document.body.addEventListener('click', function(e) {
+    if (e.target.id === 'addTaskPopUp' || e.target.closest('#addTaskPopUp')) {
+        if (!e.target.classList.contains('contentPopUpTask') && 
+            !e.target.closest('.contentPopUpTask')) {
+            closePopUpAddTask();
+        }
+    }
+});
+
+        </script>
 
 </html>

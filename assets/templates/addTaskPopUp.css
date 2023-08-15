@@ -75,6 +75,10 @@ h1 {
     resize: none;
 }
 
+.d-none {
+    display: none;
+}
+
 .taskBoardRightPopUp {
     width: 50%;
     display: flex;
@@ -261,9 +265,17 @@ hr {
 
 }
 
+/*
 .dropdown:hover .dropdown-content {
     display: block;
     border-top: none;
+}
+*/
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
 }
 
 

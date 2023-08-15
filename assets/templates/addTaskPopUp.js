@@ -30,7 +30,6 @@ function disableButtonAddTask() {
  * @param {string} value - The name of the category.
  * @param {string} colorValue - The color associated with the category.
  * @returns {Promise<void>} A promise that resolves once the category has been saved to the backend.
- * @throws {Error} Throws an error if unable to save the category to the backend.
  */
 async function saveCategory(value, colorValue) {
     categories.push({ name: value, color: colorValue });
@@ -72,6 +71,35 @@ function getCategoryColor(categoryName) {
 
 
 /**
+ * Check if the task values are valid and highlights the UI if they're not.
+ * @param {Object} values - The values retrieved from the DOM.
+ * @param {string} colorCategory - The color category of the task.
+ * @returns {boolean} True if values are valid, false otherwise.
+ */
+function validateTaskValues(values, colorCategory) {
+    if (!values.selectedCategory || !colorCategory) {
+        disableButtonAddTask();
+        document.querySelector('.dropdown').style.border = "3px solid red";
+        return false;
+    }
+    return true;
+}
+
+
+/**
+ * Adds a new category if it doesn't already exist.
+ * @param {Object} values - The values retrieved from the DOM.
+ * @param {string} existingCategory - The existing category, if any.
+ * @returns {Promise<void>} A promise that resolves once the category has been added, if necessary.
+ */
+async function handleCategory(values, existingCategory) {
+    if (!existingCategory && values.categoryName) {
+        await addNewCategory(values.categoryName);
+    }
+}
+
+
+/**
  * Adds a new task based on DOM values. 
  * If the category doesn't exist and a category name is provided, a new category is added.
  * @returns {Promise<void>} A promise that resolves once the task and, if necessary, the category have been added.
@@ -79,14 +107,16 @@ function getCategoryColor(categoryName) {
  */
 async function addToTasks() {
     let values = getValuesFromDOM();
-    let existingCategory = processCategories(values.categoryName);
+    let colorCategory = getCategoryColor(values.selectedCategory);
 
-    if (!existingCategory && values.categoryName) {
-        await addNewCategory(values.categoryName);
-    }
+    if (!validateTaskValues(values, colorCategory)) return;
 
-    let task = createTask(values, existingCategory);
+    await handleCategory(values, processCategories(values.categoryName));
+
+    let task = createTask(values, processCategories(values.categoryName));
     handleTask(task);
+    closePopUpAddTask();
+    renderTaskCards();
 }
 
 
@@ -352,20 +382,6 @@ function clearValuesOfAddTask() {
 
 
 /**
- * Deletes a task from the global `tasks` array based on its index and updates the backend storage.
- * After deletion, the task cards are re-rendered and the full card dialog is closed.
- * @async
- * @param {number} i - The index of the task in the `tasks` array to be deleted.
- */
-async function deleteTask(i) {
-    tasks.splice(i, 1);
-    await backend.setItem('tasks', JSON.stringify(tasks))
-    renderTaskCards();
-    document.getElementById('dialogFullCard').classList.add('displayNone')
-}
-
-
-/**
  * Edits the priority of a specific task and updates the backend storage.
  * The function fetches the updated priority value from the DOM, modifies the task's priority, 
  * updates the visual representation of priorities, and then persists the changes to the backend.
@@ -404,53 +420,6 @@ function editColorPrios(selectedUrgency, i) {
         document.getElementById("prio" + 4).src = "./assets/img/urgentImg.png"
         document.getElementById("prio" + 5).src = "./assets/img/mediumImg.png"
     }
-}
-
-
-/**
- * Handles the priority selection, updates visuals, and stores the selected priority in a global variable.
- * This function first retrieves the urgency level based on the selected icon. It then updates the 
- * visuals of the priority icons and adjusts the global `prios` array accordingly.
- * @param {number} i - Identifier used to target the specific DOM element representing priority.
- */
-function addPriority(i) {
-    let selectedPriority = document.getElementById("prio" + i);
-    let selectedUrgency = selectedPriority.getAttribute("value")
-    if (prios.length == 0) {
-        colorPrios(selectedUrgency, i)
-        prios.push(selectedUrgency)
-    } else {
-        prios = []
-        colorPrios(selectedUrgency, i)
-        prios.push(selectedUrgency)
-    }
-}
-
-
-/**
- * Updates the visual representation of priority icons based on the selected urgency level.
- * When an urgency level is selected, the corresponding icon is highlighted, and the other icons
- * are set to their default state.
- * @param {string} selectedUrgency - The urgency level which can be 'urgent', 'medium', or 'low'.
- * @param {number} i - Identifier used to target the specific DOM element representing priority.
- */
-function colorPrios(selectedUrgency, i) {
-    if (selectedUrgency == 'urgent') {
-        document.getElementById("prio" + i).src = "./assets/img/urgentOnclick.png";
-        document.getElementById("prio" + 2).src = "./assets/img/mediumImg.png";
-        document.getElementById("prio" + 3).src = "./assets/img/lowImg.png";
-    }
-    if (selectedUrgency == 'medium') {
-        document.getElementById("prio" + i).src = "./assets/img/mediumOnclick.png"
-        document.getElementById("prio" + 1).src = "./assets/img/urgentImg.png"
-        document.getElementById("prio" + 3).src = "./assets/img/lowImg.png"
-    }
-    if (selectedUrgency == 'low') {
-        document.getElementById("prio" + i).src = "./assets/img/lowOnclick.png"
-        document.getElementById("prio" + 1).src = "./assets/img/urgentImg.png"
-        document.getElementById("prio" + 2).src = "./assets/img/mediumImg.png"
-    }
-
 }
 
 

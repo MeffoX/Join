@@ -5,7 +5,7 @@
             <img onclick="closePopUpAddTask()" class="closePopUp" src="./assets/img/closeButtonBoard.png">
         </div>
 
-            <form  onsubmit="addToTasks(); setTimeout(function() { window.location.reload(); }, 3000); return false" class="taskBoardPopUpTask">
+            <form  onsubmit="addToTasks(); return false" class="taskBoardPopUpTask">
 
 
             <div class="taskBoardLeftPopUpTask">
@@ -23,7 +23,7 @@
                 <div class="categoryContainer"> <!--Category container-->
                     <label>Category</label>
 
-                    <div class="dropdown">
+                    <div onclick="toggleDropdown()" class="dropdown">
                         <div class="headerForSelectionField">
                             <label id="labelCategory">Select task category</label>
                             <img class="arrDown" src="./assets/img/arrDown.png">
@@ -142,4 +142,3 @@
 
 </div><!--content closed-->
 </div><!--wrapper closed-->
-

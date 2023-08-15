@@ -186,6 +186,12 @@ input {
     border-top: none;
 }
 
+.offset {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}
+
 .dropdown-content a {
     display: flex;
     align-items: center;
@@ -195,7 +201,7 @@ input {
     color: #000000;
 }
 
-
+/*
 .dropdown:hover .dropdown-content {
     display: block;
     border-top: none;
@@ -205,7 +211,7 @@ input {
     display: block;
     border-top: none;
 }
-
+*/
 
 .colorPickers {
     display: flex;
@@ -431,6 +437,32 @@ hr {
     margin-right: 30%;
 }
 
+.d-none {
+    display: none;
+}
+
+.shake-animation {
+    animation: shake 200ms 2;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        translate: 0;
+    }
+
+    25% {
+        translate: 0.125rem;
+        border-color: red;
+    }
+
+    75% {
+        translate: -0.125rem;
+        border-color: red;
+    }
+}
+
 @keyframes taskAddedPopUp {
 
     0% {
@@ -487,6 +519,17 @@ hr {
         justify-content: center;
     }
 
+    .buttonClearTask {
+        display: none;
+    }
+
+    .buttonsCreateTask {
+        position: fixed;
+        right: 5%;
+        height: 60px;
+        bottom: 13%;
+    }
+
     .dividingHR {
         display: none;
     }
@@ -520,14 +563,8 @@ hr {
 
     .buttonsCreateTask {
         margin: 0;
-
         justify-content: center;
     }
-
-    .buttonsCreateTask {
-        margin-bottom: 30% !important;
-    }
-
 
     .droppedContacts input {
         left: 40%
@@ -736,6 +773,16 @@ hr {
         right: 17%;
     }
 
+}
+
+@media (max-width: 640px){
+
+    .kanban-responsive{
+        position: absolute;
+        top: 100px;
+        font-size: 16px;
+        padding-left: 32px;
+    }
 }
 
 @media(min-width:240px) and (max-width:450px) {

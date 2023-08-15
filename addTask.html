@@ -15,6 +15,7 @@
     <script src="./js/HTMLsBoard_AddTask.js"></script>
     <script src="./js/addTask.js"></script>
     <script src="./js/contacts.js"></script>
+    <script src="./js/tasks.js"></script>
     <script src="./script.js"></script>
 </head>
 
@@ -23,11 +24,13 @@
     <div w3-include-html="./assets/templates/Sidebar.html"></div>
     <div w3-include-html="./assets/templates/header.html"></div>
     <div class="wrapper">
+        <div class="kanban-responsive d-none">Kanban Project Management Tool</div>
+
 
         <div class="content">
             <h1>Add Task </h1>
 
-            <form  onsubmit="addToTasks(); setTimeout(function() { window.location.reload(); }, 3000); return false" class="taskBoard">
+            <form  onsubmit="addToTasks(); return false" class="taskBoard">
 
                 <div class="taskBoardLeft">
                     <div><!--Title container-->
@@ -45,7 +48,7 @@
                         <label>Category</label>
 
                         <div class="dropdown">
-                            <div class="headerForSelectionField">
+                            <div onclick="toggleDropdown()" class="headerForSelectionField">
                                 <label id="labelCategory">Select task category</label>
                                 <img class="arrDown" src="./assets/img/arrDown.png">
                                 <!--Hidden input category-->
@@ -85,12 +88,12 @@
                     <div id="eventLis"> <!--Assigned to container-->
                         <label>Assigned to</label>
                         <div class="dropdownAssigned">
-                            <div class="headerForSelectionField">
+                            <div onclick="toggleDropdownContacts()" class="headerForSelectionField">
                                 <label style="position: relative;">Select contacts</label>
                                 <img class="arrDown" src="./assets/img/arrDown.png">
                                 <div>
                                     <input id="hiddenInputAddContact" class="hiddenInput displayNone"
-                                        placeholder="New category name"> <!--Hidden input addContact-->
+                                        placeholder=""> <!--Hidden input addContact-->
 
                                 </div>
 
@@ -159,8 +162,7 @@
     </div><!--content closed-->
     <div id="popUpWhenAdded" class="taskAddedPopUp displayNone"><span>Task added to board</span></div>
     </div><!--wrapper closed-->
-
-
+    
 </body>
 
 </html>

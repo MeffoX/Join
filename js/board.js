@@ -43,10 +43,13 @@ async function initBoard() {
 function renderTaskCards(i, j) {
     clearSubsections()
 
-    let search = filterTasks()
+    let search = filterTasks();
     j = 0;
     for (i = 0; i < tasks.length; i++) {
-        if (tasks[i].title.toLowerCase().includes(search)) {
+        let taskTitle = tasks[i].title.toLowerCase();
+        let taskDescription = tasks[i].description.toLowerCase(); // Assuming tasks[i] has a description property
+
+        if (taskTitle.includes(search) || taskDescription.includes(search)) { // Searches both title and description
             checkForReadiness(i, j)
             document.getElementById('progressBar' + i).style.background = tasks[i].colorOfBar
             renderAssignedContactsOnBoard(i)
@@ -344,31 +347,76 @@ function closeTask() {
 
 
 /**
+ * Retrieves tasks from the backend.
+ * @async
+ * @returns {Array} - List of tasks.
+ */
+async function getTasks() {
+    return JSON.parse(await backend.getItem('tasks'));
+}
+
+
+/**
+ * Updates the task pace based on its current status.
+ * @param {Object} task - The specific task.
+ * @param {number} j - Order of the task in the rendered list.
+ * @returns {number} - Updated pace value.
+ */
+function updateTaskPace(task, j) {
+    if (task.subtasks[j].checkedValue == 0 && task.pace < task.subtasks.length) {
+        task.pace++;
+        task.subtasks[j].checkedValue = 1;
+    } else if (task.pace > 0) {
+        task.pace--;
+        task.subtasks[j].checkedValue = 0;
+    }
+    return task.pace;
+}
+
+
+/**
+ * Computes the percentage of completion.
+ * @param {number} pace - Current pace of the task.
+ * @param {number} total - Total number of subtasks.
+ * @returns {number} - Percentage of completion.
+ */
+function computePercentage(pace, total) {
+    return pace / total * 100;
+}
+
+
+/**
+ * Updates the progress bar's color.
+ * @param {number} i - Task index.
+ * @param {number} percentOfDone - Percentage of tasks done.
+ * @returns {string} - Color of the progress bar.
+ */
+function updateProgressBarColor(i, percentOfDone) {
+    return `linear-gradient(to right, #29ABE2 ${percentOfDone}%, #e9e7e7 ${percentOfDone}%)`;
+}
+
+
+/**
  * Counts tasks and updates progress.
  * @param {number} i - Task index.
  * @param {number} j - Order of the task in the rendered list.
  * @async
  */
 async function countTasks(i, j) {
-    tasks = JSON.parse(await backend.getItem('tasks'))
-    let addedSubtaskCheckboxes = document.getElementsByClassName('addedSubtaskOnEdit')
+    const tasks = await getTasks();
+    const addedSubtaskCheckboxes = document.getElementsByClassName('addedSubtaskOnEdit');
+    
+    const pace = updateTaskPace(tasks[i], j);
+    const percentOfDone = computePercentage(pace, addedSubtaskCheckboxes.length);
 
-    if (tasks[i].subtasks[j].checkedValue == 0 && tasks[i].pace < tasks[i].subtasks.length) {
-        tasks[i].pace++
-        percentOfDone = tasks[i].pace / addedSubtaskCheckboxes.length * 100
-        tasks[i].subtasks[j].checkedValue = 1
-    } else {
-        if (tasks[i].pace > 0)
-            tasks[i].pace--
-        percentOfDone = tasks[i].pace / addedSubtaskCheckboxes.length * 100
-        tasks[i].subtasks[j].checkedValue = 0
-    }
-    colorOfBar = document.getElementById('progressBar' + i).style.background = `linear-gradient(to right, #29ABE2 ${percentOfDone}%, #e9e7e7 ${percentOfDone}%)`;
-    tasks[i].colorOfBar = colorOfBar
-    tasks[i].percentOfDone = percentOfDone
-    await backend.setItem('tasks', JSON.stringify(tasks))
+    const colorOfBar = updateProgressBarColor(i, percentOfDone);
+    document.getElementById('progressBar' + i).style.background = colorOfBar;
+
+    tasks[i].colorOfBar = colorOfBar;
+    tasks[i].percentOfDone = percentOfDone;
+
+    await backend.setItem('tasks', JSON.stringify(tasks));
 }
-
 
 
 /**
@@ -554,3 +602,4 @@ async function statusToDo(i) {
     await backend.setItem('tasks', JSON.stringify(tasks))
     renderTaskCards(i)
 }
+

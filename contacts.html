@@ -65,4 +65,34 @@
 
 </body>
 
+<script>
+    
+/**
+ * Once the document content has been fully loaded, 
+ * this function sets up event listeners for the overlay container and the add contact overlay.
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('overlayContainer').addEventListener('click', function(e) {
+        if (!document.getElementById('addContactOverlay').contains(e.target)) {
+            clearContactCard();
+        }
+    });
+
+    document.getElementById('addContactOverlay').addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+
+    /**
+     * Close the Popup for adding some Contacts.
+     */
+    function clearContactCard() {
+        document.getElementById('addContactLeft').innerHTML = '';
+        document.getElementById('addContactRightContent').innerHTML = '';
+        document.getElementById('overlayContainer').classList.add('d-none');
+    }
+});
+
+</script>
+
 </html>

@@ -129,7 +129,6 @@ async function renderContactList(initialLetter, contact, l) {
  * Open a Popup to add new Contacts. In contact-templates.js you find the HTML-Part. 
  */
 function openAddContacts() {
-    clearContactCard();
     document.getElementById('overlayContainer').classList.remove('d-none');
     setTimeout(() => {
         let contentleft = document.getElementById('addContactLeft');
@@ -156,15 +155,6 @@ async function openEditContacts(l) {
     }, 225);
 }
 
-
-/**
- * Close the Popup for adding some Contacts.
- */
-function clearContactCard() {
-    document.getElementById('addContactLeft').innerHTML = '';
-    document.getElementById('addContactRightContent').innerHTML = '';
-    document.getElementById('overlayContainer').classList.add('d-none');
-}
 
 
 /**

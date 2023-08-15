@@ -119,7 +119,6 @@ async function createTask(data) {
  * @returns {Promise<void>}
  */
 async function saveTask(task) {
-    console.log(task);
     tasks.push(task);
     categories.push(categories);
     disableButtonAddTask();
@@ -133,6 +132,13 @@ async function saveTask(task) {
  */
 async function addToTasks() {
     let data = await getTaskData();
+
+    if (!data.category || !data.colorCategory) {
+        disableButtonAddTask();
+        document.querySelector('.dropdown').style.border = "3px solid red";
+        return;  // Do not proceed if category and colorCategory are not filled
+    }
+
     let task = await createTask(data);
     await saveTask(task);
     popTheAddedDesk();
@@ -151,49 +157,6 @@ function clearValuesOfAddTask(title, description, category, assignedTo, date) {
         assignedTo.value = '',
         date.value = '',
         assignedContacts = []
-}
-
-
-/**
- * Handles priority selection and UI updates.
- * @param {number} i The priority level index.
- */
-function addPriority(i) {
-    let selectedPriority = document.getElementById("prio" + i);
-    let selectedUrgency = selectedPriority.getAttribute("value")
-    if (prios.length == 0) {
-        colorPrios(selectedUrgency, i)
-        prios.push(selectedUrgency)
-    } else {
-        prios = []
-        colorPrios(selectedUrgency, i)
-        prios.push(selectedUrgency)
-    }
-}
-
-
-/**
- * Updates UI based on selected priority.
- * @param {string} selectedUrgency The selected priority.
- * @param {number} i The priority level index.
- */
-function colorPrios(selectedUrgency, i) {
-    if (selectedUrgency == 'urgent') {
-        document.getElementById("prio" + i).src = "./assets/img/urgentOnclick.png";
-        document.getElementById("prio" + 2).src = "./assets/img/mediumImg.png";
-        document.getElementById("prio" + 3).src = "./assets/img/lowImg.png";
-    }
-    if (selectedUrgency == 'medium') {
-        document.getElementById("prio" + i).src = "./assets/img/mediumOnclick.png"
-        document.getElementById("prio" + 1).src = "./assets/img/urgentImg.png"
-        document.getElementById("prio" + 3).src = "./assets/img/lowImg.png"
-    }
-    if (selectedUrgency == 'low') {
-        document.getElementById("prio" + i).src = "./assets/img/lowOnclick.png"
-        document.getElementById("prio" + 1).src = "./assets/img/urgentImg.png"
-        document.getElementById("prio" + 2).src = "./assets/img/mediumImg.png"
-    }
-
 }
 
 
@@ -220,21 +183,7 @@ function addSubtask() {
 function deleteSubtask(i) {
     subtasksToSave.splice(i, 1)
     renderSubtasksOnAddTask()
-}
-
-
-/**
- * Removes a task.
- * @param {number} i The task index.
- * @returns {Promise<void>}
- */
-async function deleteTask(i) {
-
-    tasks.splice(i, 1);
-    await backend.setItem('tasks', JSON.stringify(tasks))
-    renderTaskCards();
-    document.getElementById('dialogFullCard').classList.add('displayNone')
-
+    renderSubtasksOnPopUpAddTask()
 }
 
 
@@ -249,36 +198,65 @@ function openInputAddCategory() {
 
 
 /**
+ * Fetches the entered category value from the form input.
+ * @returns {string} - The category value.
+ */
+function fetchCategoryValue() {
+    return document.getElementById('selectedCategoryInputValue').value;
+}
+
+/**
+ * Updates the DOM with the entered category value and its corresponding color.
+ * @param {string} value - The category value.
+ * @param {string} color - The color assigned to the category.
+ */
+function updateDOMWithCategory(value, color) {
+    document.getElementById('labelCategory').innerHTML = `
+        <div class="assignedCategoryValues">
+            ${value}
+            <div class="colorPicker colorPickerAssigned" style="background-color: ${color}" id="assignedColor"></div>
+        </div>`;
+    document.getElementById('hiddenInputCategory').classList.add('displayNone');
+    document.getElementById('dropdownCategory').style = 'none';
+}
+
+
+/**
+ * Checks if the category already exists in the global list.
+ * @param {string} value - The category value.
+ * @returns {boolean} - True if exists, else false.
+ */
+function doesCategoryExist(value) {
+    return categories.some(cat => cat.name === value);
+}
+
+
+/**
+ * Adds a new category to the global categories list and updates the backend.
+ * @param {string} value - The category value.
+ * @param {string} color - The color assigned to the category.
+ * @async
+ */
+async function addNewCategory(value, color) {
+    categories.push({ name: value, color: color });
+    await backend.setItem('categories', JSON.stringify(categories));
+}
+
+
+/**
  * Adds a new category to a task and updates the DOM accordingly.
- * 
- * This function:
- * 1. Fetches the category name entered by the user from the form input.
- * 2. Sets the color for the new category from the predefined color set.
- * 3. Updates the DOM to display the selected category along with its color.
- * 4. If the entered category does not already exist in the global `categories` list, 
- *    it adds the new category and updates the backend with the modified categories list.
  * @async
  * @returns {void}
  */
 async function addCategoryOnTask() {
-    let value = document.getElementById('selectedCategoryInputValue').value;
-    let color = colorsCategory[0];
+    const value = fetchCategoryValue();
+    const color = colorsCategory[0];
 
     if (value) {
-        document.getElementById('labelCategory').innerHTML = `
-            <div class="assignedCategoryValues">
-                ${value}
-                <div class="colorPicker colorPickerAssigned" style="background-color: ${color}" id="assignedColor"></div>
-            </div>`;
-         
-        document.getElementById('hiddenInputCategory').classList.add('displayNone');
-        document.getElementById('dropdownCategory').style = 'none';
+        updateDOMWithCategory(value, color);
         
-        let categoryExists = categories.some(cat => cat.name === value);
-        
-        if(!categoryExists) {
-            categories.push({ name: value, color: color });
-            await backend.setItem('categories', JSON.stringify(categories));
+        if (!doesCategoryExist(value)) {
+            await addNewCategory(value, color);
         }
     }
 }
@@ -286,7 +264,6 @@ async function addCategoryOnTask() {
 
 /**
  * Updates the DOM to display the selected category with its associated color.
- * 
  * This function:
  * 1. Searches for a category in the global `categories` list that matches the provided categoryName.
  * 2. If the category is found, it updates the DOM to display the category's name and its associated color.
@@ -302,6 +279,7 @@ async function selectCategory(categoryName) {
             <div class="colorPicker" style="background-color: ${category.color}; border-radius: 50%;"></div>
         `;
     }
+    closeDropdown();
 }
 
 
