@@ -156,6 +156,15 @@ async function openEditContacts(l) {
 }
 
 
+/**
+ * Close the Popup for adding some Contacts.
+ */
+function clearContactCard() {
+    document.getElementById('addContactLeft').innerHTML = '';
+    document.getElementById('addContactRightContent').innerHTML = '';
+    document.getElementById('overlayContainer').classList.add('d-none');
+}
+
 
 /**
  * Deletes Contacts from the Backend. 

@@ -15,7 +15,7 @@ function HTMLrenderTaskCards(i, j) {
                 </div>
                 <div  class="assignedToBoard">
                     <span id="assignedToCircles${i}" class="assignedToAvatars" ></span>
-                    <img id="urgencyBoard${j}" src=" ">
+                    <img id="urgencyBoard${i}" src=" ">
                 </div>
 
                 <div onclick="openChangeStatus(${i})"> <!--For mobile devices-->
@@ -85,6 +85,11 @@ function HTMLrenderSubtasksDialogFullCard(i, subtask, counter) {
 
 
 function openEditTaskHTML(i) {
+    let currentCategory = tasks[i].category;
+    let currentColor = tasks[i].colorCategory;
+    let dropdownOptions = categories.map(cat => `<a href="#" onclick="editSelectedCategory(${i}, '${cat.name}')">${cat.name}
+    <div class="colorPicker colorPickerAssigned" style="background-color: ${cat.color}" id="assignedColorEdit"></div></a>`).join("");
+    
 
     return `<div id="entireEditTaskCard" class="dialogFullCardContent"
         style="display:flex; justify-content: center !important; align-items: center;">
@@ -117,12 +122,26 @@ function openEditTaskHTML(i) {
                 </div>
             </div>
 
-             
+
+            <div class="categoryContainer">
+                <label>Category</label>
+                <div id="dropdownEditTask" class="dropdownEditTask">
+                    <div onclick="toggleDropdownEditTask()" class="headerForSelectionField">
+            <label id="labelCategoryEdit">${currentCategory}</label>
+                        <div class="colorPicker" id="categoryColorDisplay" style="background-color: ${currentColor}; border-radius: 50%; display: inline-block; margin-left: 10px;"></div>
+                        <img class="arrDown" src="./assets/img/arrDown.png">
+                    </div>
+            <div id="dropdownCategory" class="dropdown-content">
+                        ${dropdownOptions}
+                    </div>
+                </div>
+            </div>
+
 
             <div class="AssignedTo" style="padding:6px;"> <!--Assigned to container-->
                 <label>Assigned to</label>
-                <div id="reassignContacts" class="dropdownEditTask">
-                    <div  class="headerForSelectionField">
+                <div onclick="toggleDropdownReassignContacts()" id="reassignContacts" class="dropdownEditTask">
+                    <div class="headerForSelectionField">
                         <span style="position: relative;">Reassign contacts</span>
                         <img class="arrDown" src="assets/img/arrDown.png">
                         <div>
@@ -130,9 +149,7 @@ function openEditTaskHTML(i) {
                                 placeholder="New category name"> <!--Hidden input addContact-->
                         </div>
                     </div>
-                    
-                    <div id="editedDropdownAddContact" class="dropdown-content" >
-                  
+                    <div id="editedDropdownAddContact" class="dropdown-content" style="display: none;">          
                     </div>
                 </div>
             </div><!--Assigned to container closed-->

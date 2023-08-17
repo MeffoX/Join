@@ -121,9 +121,10 @@ form label {
 }
 
 #labelCategory {
+    justify-content: space-between;
     display: flex;
+    width: 100%;
     align-items: center;
-    gap: 100px
 }
 
 input {
@@ -779,10 +780,10 @@ hr {
     .buttonsCreateTaskPopUpTask {
         margin: 0;
     }
-
+/*
     .headerForSelectionField label {
         width: 150% !important
-    }
+    } */
 }
 
 @media(min-width:500px) and (max-width:1000px) {

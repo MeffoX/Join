@@ -174,22 +174,6 @@ async function renderDialogFullCard(i, colorCircle) {
 
 
 /**
- * Opens the task editing dialog.
- * @param {number} i - Task index.
- */
-function openEditTask(i) {
-    let changeStatus = document.getElementById(`dropdown-contentForMobileDevices${i}`);
-    let priority = tasks[i].prio;
-    changeStatus.style.display = 'none'
-    document.getElementById('dialogEditCard').classList.remove('displayNone')
-    document.getElementById('dialogEditCard').innerHTML = openEditTaskHTML(i)
-    document.getElementById(`editedDate`).setAttribute("min", date.toISOString().split("T")[0]);
-    listenToEvent(i)
-    setPriorityImage(priority);
-}
-
-
-/**
  * Sets the image source of priority elements based on the provided priority.
  * @param {string} priority - The priority value ('urgent', 'medium', or 'low')
  */
@@ -207,48 +191,6 @@ function setPriorityImage(priority) {
     } else {
         console.error("Ungültiger Prio-Wert:", priority);
     }
-}
-
-
-/**
- * Updates task details and re-renders the tasks.
- * @param {number} i - Task index.
- * @async
- */
-async function editTask(i) {
-    tasks = JSON.parse(await backend.getItem('tasks'))
-    let title = document.getElementById('editedTask');
-    let description = document.getElementById('editedDescription');
-    let date = document.getElementById('editedDate');
-
-
-    tasks[i] = {
-        title: title.value,
-        description: description.value,
-        category: tasks[i].category,
-        colorCategory: tasks[i].colorCategory,
-        date: date.value,
-        assignedTo: tasks[i].assignedTo,
-        prio: tasks[i].prio,
-        readinessState: tasks[i].readinessState,
-        subtasks: tasks[i].subtasks,
-        colorOfBar: tasks[i].colorOfBar,
-        percentOfDone: tasks[i].percentOfDone,
-        pace: tasks[i].pace,
-    };
-
-    await backend.setItem('tasks', JSON.stringify(tasks))
-    renderTaskCards();
-    closeEditCard()
-}
-
-
-/**
- * Closes the edit card dialog.
- */
-function closeEditCard() {
-    document.getElementById('dialogFullCard').classList.add('displayNone')
-    document.getElementById('dialogEditCard').classList.add('displayNone')
 }
 
 

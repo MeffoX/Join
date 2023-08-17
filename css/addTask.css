@@ -50,7 +50,7 @@ h1 {
     height: auto;
     max-height: 1000px;
     border: 1px solid #D1D1D1;
-
+    margin: 0px 20px 0px 20px;
 }
 
 .taskBoardLeft textarea {
@@ -230,7 +230,10 @@ input {
 }
 
 #labelCategory {
-    display: contents;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    align-items: center;
 }
 
 /* new assigned category value */
@@ -481,9 +484,7 @@ hr {
     }
 }
 
-
 @media(max-width:800px) {
-
 
     h1 {
         text-align: center;
